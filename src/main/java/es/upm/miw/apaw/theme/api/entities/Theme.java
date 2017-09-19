@@ -1,5 +1,6 @@
 package es.upm.miw.apaw.theme.api.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Theme {
@@ -36,7 +37,8 @@ public class Theme {
 
 	@Override
 	public String toString() {
-		return "Theme [id=" + id + ", name=" + name + ", date=" + date + "]";
+	    String formattedDate = new SimpleDateFormat("HH:00 dd-MMM-yyyy ").format(date.getTime());
+		return "Theme [id=" + id + ", name=" + name + ", date=" + formattedDate + "]";
 	}
 
 }

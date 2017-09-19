@@ -11,8 +11,8 @@ public class ThemeDto {
     }
 
     public ThemeDto(Theme theme) {
-        this.setId(id);
-        this.setName(name);
+        id = theme.getId();
+        name = theme.getName();
     }
 
     public int getId() {
