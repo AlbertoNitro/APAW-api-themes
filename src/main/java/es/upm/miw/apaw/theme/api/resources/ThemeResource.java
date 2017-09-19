@@ -29,7 +29,7 @@ public class ThemeResource {
     // GET **themes/{id}/overage
     public Double themeOverage(int themeId) throws NotFoundThemeIdException {
         double overage = new ThemeController().themeOverage(themeId);
-        if (overage == Double.NaN) {
+        if (!new ThemeController().existThemeId(themeId)) {
             throw new NotFoundThemeIdException("" + themeId);
         } else {
             return overage;
