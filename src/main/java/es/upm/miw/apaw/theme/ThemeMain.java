@@ -79,6 +79,21 @@ public class ThemeMain {
         this.request();
     }
 
+    public void overage() {
+        request.setMethod(HttpMethod.POST);
+        request.setPath("themes");
+        request.setBody("uno");
+        this.request();
+        request.setPath("votes");
+        request.setBody("1:4");
+        this.request();
+        request.setBody("1:5");
+        this.request();
+        request.setMethod(HttpMethod.GET);
+        request.setPath("themes/1/overage");
+        this.request();
+    }
+
 
     public void request() {
         Logger logger = LogManager.getLogger(this.getClass().getName());
@@ -93,6 +108,7 @@ public class ThemeMain {
         ThemeMain main = new ThemeMain();
         main.help();
         //main.demo(); 
-        main.themeList();
+        //main.themeList();
+        main.overage();
     }
 }
