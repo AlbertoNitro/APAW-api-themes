@@ -1,15 +1,17 @@
 package es.upm.miw.apaw.theme.api.resources;
 
+import java.util.List;
+
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.OverageDto;
-import es.upm.miw.apaw.theme.api.dtos.ThemeListDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
 import es.upm.miw.apaw.theme.api.exceptions.InvalidThemeFieldException;
 import es.upm.miw.apaw.theme.api.exceptions.NotFoundThemeIdException;
 
 public class ThemeResource {
 
     // GET **/themes
-    public ThemeListDto themeList() {
+    public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
     }
 
