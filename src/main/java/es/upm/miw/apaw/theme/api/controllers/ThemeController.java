@@ -26,7 +26,7 @@ public class ThemeController {
         return DaoFactory.getFactory().getThemeDao().read(themeId) != null;
     }
 
-    public Double themeOverage(int themeId) {
+    public double themeOverage(int themeId) {
         List<Integer> voteValues = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
         if (voteValues.isEmpty()) {
             return Double.NaN;
