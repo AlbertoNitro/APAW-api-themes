@@ -16,5 +16,5 @@ script:
 - if [ $TRAVIS_PULL_REQUEST == 0 ]; then
       mvn verify -Ppreproduction --settings settings.xml; 
     else 
-      echo "Skip Functional Testing!"; 
+      echo "ERRORES!!! ... se saltan los test de funcionalidad"; 
     fi
