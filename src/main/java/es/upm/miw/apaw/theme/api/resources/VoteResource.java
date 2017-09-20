@@ -9,13 +9,15 @@ import es.upm.miw.apaw.theme.api.resources.exceptions.VoteInvalidException;
 
 public class VoteResource {
 
+    public static final String VOTES = "votes";
+
     // POST **/votes body="themeId:vote"
     public void createVote(int themeId, int vote) throws VoteInvalidException, ThemeIdNotFoundException {
         if (vote < 0 || vote > 10) {
-            throw new VoteInvalidException("" + vote);
+            throw new VoteInvalidException(Integer.toString(vote));
         }
         if (!new VoteController().createVote(themeId, vote)) {
-            throw new ThemeIdNotFoundException("" + themeId);
+            throw new ThemeIdNotFoundException(Integer.toString(themeId));
         }
     }
 

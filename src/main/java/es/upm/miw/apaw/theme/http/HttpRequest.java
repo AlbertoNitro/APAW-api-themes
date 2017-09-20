@@ -59,13 +59,16 @@ public class HttpRequest extends HttpBase {
     }
 
     private String queryParams() {
-        String query = "";
+        StringBuilder query = new StringBuilder();
         String separator = "?";
-        for (String key : queryParams.keySet()) {
-            query += separator + key + "=" + queryParams.get(key);
+        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+            query.append(separator);
+            query.append(entry.getKey());
+            query.append("=");
+            query.append(entry.getValue());
             separator = "&";
         }
-        return query;
+        return query.toString();
     }
 
 }

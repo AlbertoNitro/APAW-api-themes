@@ -44,7 +44,7 @@ public class ThemeControllerIT {
         themeController.createTheme("tema1");
         new VoteController().createVote(1, 2);
         new VoteController().createVote(1, 3);
-        assertEquals(2.5,themeController.themeOverage(1),10e-3);
+        assertEquals(2.5, themeController.themeOverage(1), 10e-2);
     }
 
 }

@@ -20,18 +20,15 @@ public class Dispatcher {
     }
 
     public void doGet(HttpRequest request, HttpResponse response) {
-        // **/themes
-        if ("themes".equals(request.getPath())) {
+        if (ThemeResource.THEMES.equals(request.getPath())) {
             response.setBody(themeResource.themeList().toString());
-            // **/themes/{id}/overage
-        } else if ("themes".equals(request.paths()[0]) && "overage".equals(request.paths()[2])) {
+        } else if (ThemeResource.THEMES.equals(request.paths()[0]) && ThemeResource.THEMES_ID_ID_OVERAGE.equals(request.paths()[2])) {
             try {
                 response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
             } catch (Exception e) {
                 responseError(response, e);
             }
-            // **/votes
-        } else if ("votes".equals(request.getPath())) {
+        } else if (VoteResource.VOTES.equals(request.getPath())) {
             response.setBody(voteResource.voteList().toString());
         } else {
             responseError(response, new RequestInvalidException(request.getPath()));
@@ -40,8 +37,7 @@ public class Dispatcher {
 
     public void doPost(HttpRequest request, HttpResponse response) {
         switch (request.getPath()) {
-        // POST **/themes body="themeName"
-        case "themes":
+        case ThemeResource.THEMES:
             // Injectar parámetros...
             try {
                 themeResource.createTheme(request.getBody());
@@ -50,8 +46,8 @@ public class Dispatcher {
                 this.responseError(response, e);
             }
             break;
-        // POST votes body="themeId:vote"
-        case "votes":
+        // body="themeId:vote"
+        case VoteResource.VOTES:
             String themeId = request.getBody().split(":")[0];
             String vote = request.getBody().split(":")[1];
             try {
@@ -68,27 +64,15 @@ public class Dispatcher {
     }
 
     public void doPut(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        default:
-            responseError(response, new RequestInvalidException(request.getPath()));
-            break;
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
     public void doPatch(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        default:
-            responseError(response, new RequestInvalidException(request.getPath()));
-            break;
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
     public void doDelete(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        default:
-            responseError(response, new RequestInvalidException(request.getPath()));
-            break;
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
 }
