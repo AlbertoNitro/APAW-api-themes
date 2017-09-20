@@ -10,5 +10,7 @@ notifications:
     recipients:
     - j.bernal@upm.es
 script:
-#Test unitario
-- mvn package --settings settings.xml
+# Unit Test & Integration Test
+- mvn verify --settings settings.xml
+# Functional Testing
+- mvn verify -Ppreproduction --settings settings.xml
