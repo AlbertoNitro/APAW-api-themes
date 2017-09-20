@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.theme.api.exceptions;
+package es.upm.miw.apaw.theme.api.resources.exceptions;
 
 public class ThemeIdNotFoundException extends Exception {
 	private static final long serialVersionUID = -3893110892899234744L;

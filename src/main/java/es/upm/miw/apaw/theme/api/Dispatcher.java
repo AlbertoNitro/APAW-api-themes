@@ -1,9 +1,9 @@
 package es.upm.miw.apaw.theme.api;
 
-import es.upm.miw.apaw.theme.api.exceptions.RequestInvalidException;
-import es.upm.miw.apaw.theme.api.exceptions.ThemeFieldInvalidException;
 import es.upm.miw.apaw.theme.api.resources.ThemeResource;
 import es.upm.miw.apaw.theme.api.resources.VoteResource;
+import es.upm.miw.apaw.theme.api.resources.exceptions.RequestInvalidException;
+import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeFieldInvalidException;
 import es.upm.miw.apaw.theme.http.HttpRequest;
 import es.upm.miw.apaw.theme.http.HttpResponse;
 import es.upm.miw.apaw.theme.http.HttpStatus;

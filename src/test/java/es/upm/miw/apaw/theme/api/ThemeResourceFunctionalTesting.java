@@ -35,12 +35,12 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void createThemeTest() {
+    public void testCreateTheme() {
         this.createTheme();
     }
 
     @Test
-    public void createThemeNameEmptyTest() {
+    public void testCreateThemeNameEmpty() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
@@ -49,7 +49,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void createWithoutThemeNameTest() {
+    public void testCreateWithoutThemeName() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
@@ -57,7 +57,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void themeListTest() {
+    public void testThemeList() {
         this.createTheme();
         request.setMethod(HttpMethod.GET);
         request.setBody("");
@@ -66,7 +66,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void themeListEmptyTest() {
+    public void testThemeListEmpty() {
         request.setMethod(HttpMethod.GET);
         request.setBody("");
         request.setPath("themes");
@@ -75,7 +75,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void themeOverageTest() {
+    public void testThemeOverage() {
         this.createTheme();
         request.setPath("votes");
         request.setBody("1:4");
@@ -88,7 +88,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void themeOverageWithoutVoteTest() {
+    public void testThemeOverageWithoutVote() {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("uno");
@@ -99,7 +99,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void themeOverageThemeIdNotFoundTest() {
+    public void testThemeOverageThemeIdNotFound() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/overage");

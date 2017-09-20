@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.theme.api.exceptions;
+package es.upm.miw.apaw.theme.api.resources.exceptions;
 
 public class VoteInvalidException extends Exception {
 	private static final long serialVersionUID = -5173361541880534566L;

@@ -40,12 +40,12 @@ public class VoteResourceFunctionalTesting {
     }
     
     @Test
-    public void createVoteTest() {
+    public void testCreateVote() {
         this.createVotes();
     }
     
     @Test
-    public void createVoteVoteInvalidExceptionTest() {
+    public void testCreateVoteVoteInvalidException() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
@@ -59,7 +59,7 @@ public class VoteResourceFunctionalTesting {
     }
     
     @Test
-    public void createThemeIdNotFoundExceptionTest() {
+    public void testCreateThemeIdNotFoundException() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("votes");
@@ -68,7 +68,7 @@ public class VoteResourceFunctionalTesting {
     }
     
     @Test
-    public void voteListTest() {
+    public void testVoteList() {
         this.createVotes();
         request.setMethod(HttpMethod.GET);
         request.setBody("");
