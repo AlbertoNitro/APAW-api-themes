@@ -1,14 +1,18 @@
-package es.upm.miw.apaw.theme.http;
+package es.upm.miw.apaw.theme.client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import es.upm.miw.apaw.theme.http.HttpException;
+import es.upm.miw.apaw.theme.http.HttpRequest;
+import es.upm.miw.apaw.theme.http.HttpResponse;
 
 public class HttpService {
 
     public HttpResponse httpRequest(HttpRequest request) {
         Logger logger = LogManager.getLogger(this.getClass().getName());
         logger.info(request.toString());
-        HttpResponse response = new Server().request(request);
+        HttpResponse response = new Server().submit(request);
         logger.info(response);
         logger.info("---------------------------------------ooo----------------------------------------");
         if (response.getStatus().isError()) {
