@@ -1,37 +1,38 @@
 package es.upm.miw.apaw.theme.api.resources;
 
+import java.util.List;
+
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
-import es.upm.miw.apaw.theme.api.dtos.OverageDto;
-import es.upm.miw.apaw.theme.api.dtos.ThemeListDto;
-import es.upm.miw.apaw.theme.api.exceptions.InvalidThemeFieldException;
-import es.upm.miw.apaw.theme.api.exceptions.NotFoundThemeIdException;
+import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
+import es.upm.miw.apaw.theme.api.exceptions.ThemeFieldInvalidException;
+import es.upm.miw.apaw.theme.api.exceptions.ThemeIdNotFoundException;
 
 public class ThemeResource {
 
     // GET **/themes
-    public ThemeListDto themeList() {
+    public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
     }
 
     // POST **/themes body="themeName"
-    public void createTheme(String themeName) throws InvalidThemeFieldException {
+    public void createTheme(String themeName) throws ThemeFieldInvalidException {
         this.validateField(themeName);
         new ThemeController().createTheme(themeName);
     }
 
-    private void validateField(String field) throws InvalidThemeFieldException {
+    private void validateField(String field) throws ThemeFieldInvalidException {
         if (field == null || field.isEmpty()) {
-            throw new InvalidThemeFieldException(field);
+            throw new ThemeFieldInvalidException(field);
         }
     }
 
     // GET **themes/{id}/overage
-    public OverageDto themeOverage(int themeId) throws NotFoundThemeIdException {
-        OverageDto overageWrapper = new ThemeController().themeOverage(themeId);
-        if (overageWrapper == null) {
-            throw new NotFoundThemeIdException("" + themeId);
+    public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
+        double overage = new ThemeController().themeOverage(themeId);
+        if (!new ThemeController().existThemeId(themeId)) {
+            throw new ThemeIdNotFoundException("" + themeId);
         } else {
-            return overageWrapper;
+            return overage;
         }
     }
 

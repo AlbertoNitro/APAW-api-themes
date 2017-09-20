@@ -1,14 +1,14 @@
 package es.upm.miw.apaw.theme.api.exceptions;
 
-public class InvalidRequestException extends Exception {
+public class RequestInvalidException extends Exception {
 	private static final long serialVersionUID = -642045799876625537L;
 	public static final String DESCRIPTION = "Petición no implementada";
 
-	public InvalidRequestException(String detail) {
+	public RequestInvalidException(String detail) {
 		super(DESCRIPTION + ". " + detail);
 	}
 
-	public InvalidRequestException() {
+	public RequestInvalidException() {
 		this("");
 	}
 

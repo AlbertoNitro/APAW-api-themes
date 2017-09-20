@@ -1,36 +1,39 @@
 package es.upm.miw.apaw.theme.api.dtos;
 
+import es.upm.miw.apaw.theme.api.entities.Vote;
+
 public class VoteDto {
-	private String themeName;
-	private int voteValue;
+    private String themeName;
 
-	public VoteDto() {
-	}
+    private int voteValue;
 
-	public VoteDto(String themeName, int voteValue) {
-		this.themeName = themeName;
-		this.voteValue = voteValue;
-	}
+    public VoteDto() {
+    }
 
-	public String getThemeName() {
-		return themeName;
-	}
+    public VoteDto(Vote vote) {
+        this.themeName = vote.getTheme().getName();
+        this.voteValue = vote.getValue();
+    }
 
-	public void setThemeName(String themeName) {
-		this.themeName = themeName;
-	}
+    public String getThemeName() {
+        return themeName;
+    }
 
-	public int getVoteValue() {
-		return voteValue;
-	}
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
+    }
 
-	public void setVoteValue(int voteValue) {
-		this.voteValue = voteValue;
-	}
+    public int getVoteValue() {
+        return voteValue;
+    }
 
-	@Override
-	public String toString() {
-		return "{\"themeName\":\"" + themeName + ",\"voteValue\":" + voteValue + "}";
-	}
+    public void setVoteValue(int voteValue) {
+        this.voteValue = voteValue;
+    }
+
+    @Override
+    public String toString() {
+        return "{\"themeName\":\"" + themeName + ",\"voteValue\":" + voteValue + "}";
+    }
 
 }

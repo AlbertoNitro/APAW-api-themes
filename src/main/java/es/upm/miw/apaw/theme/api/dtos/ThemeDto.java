@@ -10,13 +10,9 @@ public class ThemeDto {
     public ThemeDto() {
     }
 
-    public ThemeDto(int id, String name) {
-        this.setId(id);
-        this.setName(name);
-    }
-
     public ThemeDto(Theme theme) {
-        this(theme.getId(), theme.getName());
+        id = theme.getId();
+        name = theme.getName();
     }
 
     public int getId() {
