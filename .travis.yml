@@ -13,7 +13,7 @@ script:
 # Unit Test & Integration Test
 - mvn verify --settings settings.xml
 # Functional Testing
-- if [ $COMPILE_RESULT == 0 ]; then
+- if [ $TRAVIS_TEST_RESULT == 0 ]; then
        mvn verify -Ppreproduction --settings settings.xml; 
     else 
        echo "ERRORES!!! ... se saltan los test de funcionalidad"; 
