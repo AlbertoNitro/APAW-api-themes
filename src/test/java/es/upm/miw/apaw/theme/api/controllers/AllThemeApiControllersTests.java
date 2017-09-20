@@ -9,6 +9,6 @@ import org.junit.runners.Suite.SuiteClasses;
     ThemeControllerIT.class, 
     VoteControllerIT.class
 })
-public class AllThemeApiControllerTests {
+public class AllThemeApiControllersTests {
 
 }
