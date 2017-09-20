@@ -9,6 +9,8 @@ import es.upm.miw.apaw.theme.api.resources.exceptions.VoteInvalidException;
 
 public class VoteResource {
 
+    public static final String VOTES = "votes";
+
     // POST **/votes body="themeId:vote"
     public void createVote(int themeId, int vote) throws VoteInvalidException, ThemeIdNotFoundException {
         if (vote < 0 || vote > 10) {
