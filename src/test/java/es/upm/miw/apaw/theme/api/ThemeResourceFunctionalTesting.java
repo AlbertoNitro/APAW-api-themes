@@ -26,17 +26,21 @@ public class ThemeResourceFunctionalTesting {
         DaoFactory.setFactory(new DaoFactoryMemory());
         request = new HttpRequest();
     }
-
-    @Test
-    public void CreateThemeTest() {
+    
+    public void createTheme() {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("uno");
-        new HttpService().httpRequest(request);
+        new HttpService().httpRequest(request);        
     }
 
     @Test
-    public void CreateThemeNameEmptyTest() {
+    public void createThemeTest() {
+        this.createTheme();
+    }
+
+    @Test
+    public void createThemeNameEmptyTest() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
@@ -45,7 +49,7 @@ public class ThemeResourceFunctionalTesting {
     }
 
     @Test
-    public void CreateWithoutThemeNameTest() {
+    public void createWithoutThemeNameTest() {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
@@ -54,10 +58,7 @@ public class ThemeResourceFunctionalTesting {
 
     @Test
     public void themeListTest() {
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("uno");
-        new HttpService().httpRequest(request);
+        this.createTheme();
         request.setMethod(HttpMethod.GET);
         request.setBody("");
         request.setPath("themes");
@@ -75,10 +76,7 @@ public class ThemeResourceFunctionalTesting {
 
     @Test
     public void themeOverageTest() {
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("uno");
-        new HttpService().httpRequest(request);
+        this.createTheme();
         request.setPath("votes");
         request.setBody("1:4");
         new HttpService().httpRequest(request);

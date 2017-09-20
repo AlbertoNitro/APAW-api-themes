@@ -1,5 +1,7 @@
 package es.upm.miw.apaw.theme.api.dtos;
 
+import es.upm.miw.apaw.theme.api.entities.Vote;
+
 public class VoteDto {
     private String themeName;
 
@@ -8,9 +10,9 @@ public class VoteDto {
     public VoteDto() {
     }
 
-    public VoteDto(String themeName, int voteValue) {
-        this.themeName = themeName;
-        this.voteValue = voteValue;
+    public VoteDto(Vote vote) {
+        this.themeName = vote.getTheme().getName();
+        this.voteValue = vote.getValue();
     }
 
     public String getThemeName() {
