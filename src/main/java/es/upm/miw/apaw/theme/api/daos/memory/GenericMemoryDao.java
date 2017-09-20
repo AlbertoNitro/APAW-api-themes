@@ -39,7 +39,7 @@ public abstract class GenericMemoryDao<T> implements GenericDao<T, Integer> {
 
 	@Override
 	public List<T> findAll() {
-		return new ArrayList<T>(map.values());
+		return new ArrayList<>(map.values());
 	}
 
 	protected abstract Integer getId(T entity);

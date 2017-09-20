@@ -9,9 +9,6 @@ public class DaoFactoryMemory extends DaoFactory {
 	private ThemeDao themeDao;
 	private VoteDao voteDao;
 
-	public DaoFactoryMemory() {
-	}
-
 	@Override
 	public ThemeDao getThemeDao() {
 		if (themeDao == null) {

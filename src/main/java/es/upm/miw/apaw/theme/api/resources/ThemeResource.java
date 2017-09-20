@@ -10,6 +10,7 @@ import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 public class ThemeResource {
 
     public static final String THEMES = "themes";
+
     public static final String THEMES_ID_ID_OVERAGE = "overage";
 
     // GET **/themes
@@ -32,7 +33,7 @@ public class ThemeResource {
     // GET **themes/{id}/overage
     public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
         if (!new ThemeController().existThemeId(themeId)) {
-            throw new ThemeIdNotFoundException("" + themeId);
+            throw new ThemeIdNotFoundException(Integer.toString(themeId));
         } else {
             return new ThemeController().themeOverage(themeId);
         }
