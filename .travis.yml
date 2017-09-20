@@ -12,7 +12,7 @@ notifications:
 script:
 # Unit Test & Integration Test
 - mvn verify --settings settings.xml
-# Functional Testing
+# Deploy & Functional Testing
 - if [ $TRAVIS_TEST_RESULT == 0 ]; then
        mvn verify -Ppreproduction --settings settings.xml; 
     else 
