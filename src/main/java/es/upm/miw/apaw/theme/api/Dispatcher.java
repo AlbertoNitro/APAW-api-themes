@@ -1,7 +1,7 @@
 package es.upm.miw.apaw.theme.api;
 
-import es.upm.miw.apaw.theme.api.exceptions.InvalidRequestException;
-import es.upm.miw.apaw.theme.api.exceptions.InvalidThemeFieldException;
+import es.upm.miw.apaw.theme.api.exceptions.RequestInvalidException;
+import es.upm.miw.apaw.theme.api.exceptions.ThemeFieldInvalidException;
 import es.upm.miw.apaw.theme.api.resources.ThemeResource;
 import es.upm.miw.apaw.theme.api.resources.VoteResource;
 import es.upm.miw.apaw.theme.http.HttpRequest;
@@ -34,7 +34,7 @@ public class Dispatcher {
         } else if ("votes".equals(request.getPath())) {
             response.setBody(voteResource.voteList().toString());
         } else {
-            responseError(response, new InvalidRequestException(request.getPath()));
+            responseError(response, new RequestInvalidException(request.getPath()));
         }
     }
 
@@ -46,7 +46,7 @@ public class Dispatcher {
             try {
                 themeResource.createTheme(request.getBody());
                 response.setStatus(HttpStatus.CREATED);
-            } catch (InvalidThemeFieldException e) {
+            } catch (ThemeFieldInvalidException e) {
                 this.responseError(response, e);
             }
             break;
@@ -62,7 +62,7 @@ public class Dispatcher {
             }
             break;
         default:
-            responseError(response, new InvalidRequestException(request.getPath()));
+            responseError(response, new RequestInvalidException(request.getPath()));
             break;
         }
     }
@@ -70,7 +70,7 @@ public class Dispatcher {
     public void doPut(HttpRequest request, HttpResponse response) {
         switch (request.getPath()) {
         default:
-            responseError(response, new InvalidRequestException(request.getPath()));
+            responseError(response, new RequestInvalidException(request.getPath()));
             break;
         }
     }
@@ -78,7 +78,7 @@ public class Dispatcher {
     public void doPatch(HttpRequest request, HttpResponse response) {
         switch (request.getPath()) {
         default:
-            responseError(response, new InvalidRequestException(request.getPath()));
+            responseError(response, new RequestInvalidException(request.getPath()));
             break;
         }
     }
@@ -86,7 +86,7 @@ public class Dispatcher {
     public void doDelete(HttpRequest request, HttpResponse response) {
         switch (request.getPath()) {
         default:
-            responseError(response, new InvalidRequestException(request.getPath()));
+            responseError(response, new RequestInvalidException(request.getPath()));
             break;
         }
     }

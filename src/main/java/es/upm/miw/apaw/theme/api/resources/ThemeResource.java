@@ -4,8 +4,8 @@ import java.util.List;
 
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
-import es.upm.miw.apaw.theme.api.exceptions.InvalidThemeFieldException;
-import es.upm.miw.apaw.theme.api.exceptions.NotFoundThemeIdException;
+import es.upm.miw.apaw.theme.api.exceptions.ThemeFieldInvalidException;
+import es.upm.miw.apaw.theme.api.exceptions.ThemeIdNotFoundException;
 
 public class ThemeResource {
 
@@ -15,22 +15,22 @@ public class ThemeResource {
     }
 
     // POST **/themes body="themeName"
-    public void createTheme(String themeName) throws InvalidThemeFieldException {
+    public void createTheme(String themeName) throws ThemeFieldInvalidException {
         this.validateField(themeName);
         new ThemeController().createTheme(themeName);
     }
 
-    private void validateField(String field) throws InvalidThemeFieldException {
+    private void validateField(String field) throws ThemeFieldInvalidException {
         if (field == null || field.isEmpty()) {
-            throw new InvalidThemeFieldException(field);
+            throw new ThemeFieldInvalidException(field);
         }
     }
 
     // GET **themes/{id}/overage
-    public Double themeOverage(int themeId) throws NotFoundThemeIdException {
+    public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
         double overage = new ThemeController().themeOverage(themeId);
         if (!new ThemeController().existThemeId(themeId)) {
-            throw new NotFoundThemeIdException("" + themeId);
+            throw new ThemeIdNotFoundException("" + themeId);
         } else {
             return overage;
         }
