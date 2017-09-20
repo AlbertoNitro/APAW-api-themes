@@ -14,7 +14,7 @@ import es.upm.miw.apaw.theme.http.HttpMethod;
 import es.upm.miw.apaw.theme.http.HttpRequest;
 import es.upm.miw.apaw.theme.http.HttpService;
 
-public class ThemeFunctionalTesting {
+public class ThemeResourceFunctionalTesting {
 
     private HttpRequest request;
 
