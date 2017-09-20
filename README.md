@@ -17,5 +17,11 @@
 * Travis-ci
 * Sonarcloud
 
+### Importar el proyecto mediante Eclipse
+1. Clonar mediante Eclipse este repositorio en la máquina local: https://youtu.be/rQNixJQQ25g
+1. Importar el repositorio clonado: https://youtu.be/yYvD8ZJtWwI
+1. Crear en Eclipse las ramas locales asociadas a las remotas
+
 ### Más información en la [WIKI](../../wiki)
 
+###### Autor: Jesús Bernal Bermúdez U.P.M.
