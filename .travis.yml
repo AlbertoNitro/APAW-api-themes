@@ -13,7 +13,7 @@ script:
 # Unit Test & Integration Test
 - mvn verify --settings settings.xml
 # Functional Testing
-- if [ $TRAVIS_BRANCH == "develop" ]; then
+- if [ $TRAVIS_PULL_REQUEST == 0 ]; then
       mvn verify -Ppreproduction --settings settings.xml; 
     else 
       echo "Skip Functional Testing!"; 
