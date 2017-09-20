@@ -10,7 +10,7 @@ import org.junit.Test;
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.daos.memory.DaoFactoryMemory;
 
-public class ThemeControllerTest {
+public class ThemeControllerIT {
 
     private ThemeController themeController;
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
-import es.upm.miw.apaw.theme.api.exceptions.ThemeFieldInvalidException;
-import es.upm.miw.apaw.theme.api.exceptions.ThemeIdNotFoundException;
+import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeFieldInvalidException;
+import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 
 public class ThemeResource {
 

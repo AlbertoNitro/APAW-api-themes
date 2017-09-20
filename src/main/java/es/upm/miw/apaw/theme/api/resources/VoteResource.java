@@ -4,8 +4,8 @@ import java.util.List;
 
 import es.upm.miw.apaw.theme.api.controllers.VoteController;
 import es.upm.miw.apaw.theme.api.dtos.VoteDto;
-import es.upm.miw.apaw.theme.api.exceptions.VoteInvalidException;
-import es.upm.miw.apaw.theme.api.exceptions.ThemeIdNotFoundException;
+import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
+import es.upm.miw.apaw.theme.api.resources.exceptions.VoteInvalidException;
 
 public class VoteResource {
 
