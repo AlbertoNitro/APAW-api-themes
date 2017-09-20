@@ -1,16 +1,21 @@
-# Forja
-#### Asignatura: *Ingeniería Web: Visión General*
-#### [Máster en Ingeniería Web por la U.P.M.](http://miw.etsisi.upm.es)
+# Arquitectura de un mini API-Rest simulado
+> Este proyecto pretende ser un ejemplo sencillo de arquitectura de un API-Rest simulado para comprender las capas que intervienen y la organización de los diferentes tipos de test, con integración continua y control de la calidad del código
+> #### [Máster en Ingeniería Web por la Universidad Politécnica de Madrid (miw-upm)](http://miw.etsisi.upm.es)
+> #### Asignatura: *Arquitectura y Patrones para Aplicaciones Web*
+
+### Estado del código
+
+[![Build Status](https://travis-ci.org/miw-upm/APAW-api-themes.svg?branch=develop)](https://travis-ci.org/miw-upm/APAW-api-themes)
+
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=es.upm.miw:APAW-api-themes)](https://sonarcloud.io/dashboard/index/es.upm.miw:APAW-api-themes)
 
 ### Tecnologías necesarias
 * Java
 * Maven
 * Eclipse
 * GitHub
+* Travis-ci
+* Sonarcloud
 
-### Descripción
-Este proyecto pretende ser una plantilla maven para crear un proyecto
-1.- Descomprimir en la carpeta de trabajo
-1.- Editar el pom.xml y cambiarle el nombre del proyecto
-1.- Desde Eclipse, importar el proyecto como un proyecto de maven existente
+### Más información en la [WIKI](../../wiki)
 
