@@ -30,7 +30,7 @@ public class ThemeResource {
         }
     }
 
-    // GET **themes/{id}/overage
+    // GET **/themes/{id}/overage
     public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
         if (!new ThemeController().existThemeId(themeId)) {
             throw new ThemeIdNotFoundException(Integer.toString(themeId));
@@ -38,5 +38,8 @@ public class ThemeResource {
             return new ThemeController().themeOverage(themeId);
         }
     }
+    
+    // GET **/themes/vote
+    //TODO
 
 }
