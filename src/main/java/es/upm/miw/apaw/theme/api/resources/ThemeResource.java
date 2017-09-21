@@ -13,6 +13,8 @@ public class ThemeResource {
     public static final String THEMES = "themes";
 
     public static final String THEMES_ID_ID_OVERAGE = "overage";
+    
+    public static final String THEMES_ID_ID_VOTE = "vote";
 
     // GET **/themes
     public List<ThemeDto> themeList() {

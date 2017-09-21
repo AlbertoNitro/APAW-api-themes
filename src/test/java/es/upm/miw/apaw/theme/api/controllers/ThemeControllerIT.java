@@ -3,6 +3,7 @@ package es.upm.miw.apaw.theme.api.controllers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +46,15 @@ public class ThemeControllerIT {
         new VoteController().createVote(1, 2);
         new VoteController().createVote(1, 3);
         assertEquals(2.5, themeController.themeOverage(1), 10e-2);
+    }
+
+    @Test
+    public void testThemeVote() {
+        themeController.createTheme("tema1");
+        new VoteController().createVote(1, 2);
+        new VoteController().createVote(1, 3);
+        assertEquals("tema1", themeController.themeVote(1).getThemeDto().getName());
+        assertArrayEquals(new Integer[] {2, 3}, themeController.themeVote(1).getVoteList().toArray(new Integer[0]));
     }
 
 }

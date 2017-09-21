@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.theme.api;
+package es.upm.miw.apaw.theme;
 
 import static org.junit.Assert.assertEquals;
 
@@ -103,6 +103,27 @@ public class ThemeResourceFunctionalTesting {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/overage");
+        new HttpService().httpRequest(request);
+    }
+    
+    @Test
+    public void testThemeVote() {
+        this.createTheme();
+        request.setPath("votes");
+        request.setBody("1:4");
+        new HttpService().httpRequest(request);
+        request.setBody("1:5");
+        new HttpService().httpRequest(request);
+        request.setMethod(HttpMethod.GET);
+        request.setPath("themes/1/vote");
+        assertEquals("{{\"id\":1,\"name\":\"uno\"},[4, 5]}", new HttpService().httpRequest(request).getBody());
+    }
+
+    @Test
+    public void testThemeVoteThemeIdNotFound() {
+        exception.expect(HttpException.class);
+        request.setMethod(HttpMethod.GET);
+        request.setPath("themes/1/vote");
         new HttpService().httpRequest(request);
     }
 
