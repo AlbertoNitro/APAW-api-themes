@@ -28,6 +28,12 @@ public class Dispatcher {
             } catch (Exception e) {
                 responseError(response, e);
             }
+        } else if (ThemeResource.THEMES.equals(request.paths()[0]) && ThemeResource.THEMES_ID_ID_VOTE.equals(request.paths()[2])) {
+            try {
+                response.setBody(themeResource.themeVote(Integer.valueOf(request.paths()[1])).toString());
+            } catch (Exception e) {
+                responseError(response, e);
+            }
         } else if (VoteResource.VOTES.equals(request.getPath())) {
             response.setBody(voteResource.voteList().toString());
         } else {

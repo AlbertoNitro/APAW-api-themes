@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.theme.api;
+package es.upm.miw.apaw.theme;
 
 import static org.junit.Assert.assertEquals;
 

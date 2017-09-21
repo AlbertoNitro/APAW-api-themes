@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.theme.api;
+package es.upm.miw.apaw.theme;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -9,6 +9,6 @@ import org.junit.runners.Suite.SuiteClasses;
     ThemeResourceFunctionalTesting.class, 
     VoteResourceFunctionalTesting.class
 })
-public class AllThemeApiFunctionalTestings {
+public class AllThemeFunctionalTestings {
 
 }
