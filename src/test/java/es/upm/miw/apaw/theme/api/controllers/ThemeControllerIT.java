@@ -47,6 +47,12 @@ public class ThemeControllerIT {
         new VoteController().createVote(1, 3);
         assertEquals(2.5, themeController.themeOverage(1), 10e-2);
     }
+    
+    @Test
+    public void testThemeOverageIfEmpty() {
+        themeController.createTheme("tema1");
+        assertEquals(Double.NaN, themeController.themeOverage(1), 10e-2);
+    }
 
     @Test
     public void testThemeVote() {

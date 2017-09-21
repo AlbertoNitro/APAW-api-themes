@@ -28,6 +28,10 @@ public class Vote {
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     public Theme getTheme() {
         return theme;
     }
