@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeVoteDto;
 import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeFieldInvalidException;
 import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 
@@ -39,7 +40,12 @@ public class ThemeResource {
         }
     }
     
-    // GET **/themes/vote
-    //TODO
-
+    // GET **/themes/{id}/vote
+    public ThemeVoteDto themeVote(int themeId)  throws ThemeIdNotFoundException {
+        if (!new ThemeController().existThemeId(themeId)) {
+            throw new ThemeIdNotFoundException(Integer.toString(themeId));
+        } else {
+            return new ThemeController().themeVote(themeId);
+        }        
+    }
 }
