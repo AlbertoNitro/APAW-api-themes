@@ -171,17 +171,17 @@
 		</plugins>
 	</build>
 
-	<developers>
-		<developer>
-			<name>Name</name>
-			<id>Id</id>
-			<email>mail@gmail.com</email>
-			<organization>MIW UPM</organization>
-			<roles>
-				<role>Architect</role>
-				<role>Developer</role>
-			</roles>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <name>Jesus Bernal</name>
+            <id>J.Bernal</id>
+            <email>j.bernal@upm.es</email>
+            <organization>MIW UPM</organization>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
 
 </project>
