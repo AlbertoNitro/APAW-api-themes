@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.daos.memory.DaoFactoryMemory;
-import es.upm.miw.apaw.theme.client.HttpService;
+import es.upm.miw.apaw.theme.http.HttpClientService;
 import es.upm.miw.apaw.theme.http.HttpException;
 import es.upm.miw.apaw.theme.http.HttpMethod;
 import es.upm.miw.apaw.theme.http.HttpRequest;
@@ -31,12 +31,12 @@ public class VoteResourceFunctionalTesting {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("uno");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setPath("votes");
         request.setBody("1:4");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setBody("1:5");
-        new HttpService().httpRequest(request);        
+        new HttpClientService().httpRequest(request);        
     }
     
     @Test
@@ -50,12 +50,12 @@ public class VoteResourceFunctionalTesting {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("uno");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setPath("votes");
         request.setBody("1:-1");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setBody("1:x");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
     }
     
     @Test
@@ -64,7 +64,7 @@ public class VoteResourceFunctionalTesting {
         request.setMethod(HttpMethod.POST);
         request.setPath("votes");
         request.setBody("1:1");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
     }
     
     @Test
@@ -72,8 +72,8 @@ public class VoteResourceFunctionalTesting {
         this.createVotes();
         request.setMethod(HttpMethod.GET);
         request.setBody("");
-        new HttpService().httpRequest(request);
-        assertEquals("[{\"themeName\":\"uno,\"voteValue\":4}, {\"themeName\":\"uno,\"voteValue\":5}]", new HttpService().httpRequest(request).getBody());
+        new HttpClientService().httpRequest(request);
+        assertEquals("[{\"themeName\":\"uno,\"voteValue\":4}, {\"themeName\":\"uno,\"voteValue\":5}]", new HttpClientService().httpRequest(request).getBody());
     }
 
 }

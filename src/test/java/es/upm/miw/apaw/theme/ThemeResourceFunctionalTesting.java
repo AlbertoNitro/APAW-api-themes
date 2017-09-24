@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.daos.memory.DaoFactoryMemory;
-import es.upm.miw.apaw.theme.client.HttpService;
+import es.upm.miw.apaw.theme.http.HttpClientService;
 import es.upm.miw.apaw.theme.http.HttpException;
 import es.upm.miw.apaw.theme.http.HttpMethod;
 import es.upm.miw.apaw.theme.http.HttpRequest;
@@ -31,7 +31,7 @@ public class ThemeResourceFunctionalTesting {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("uno");
-        new HttpService().httpRequest(request);        
+        new HttpClientService().httpRequest(request);        
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ThemeResourceFunctionalTesting {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ThemeResourceFunctionalTesting {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ThemeResourceFunctionalTesting {
         request.setMethod(HttpMethod.GET);
         request.setBody("");
         request.setPath("themes");
-        assertEquals("[{\"id\":1,\"name\":\"uno\"}]", new HttpService().httpRequest(request).getBody());
+        assertEquals("[{\"id\":1,\"name\":\"uno\"}]", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
@@ -70,8 +70,8 @@ public class ThemeResourceFunctionalTesting {
         request.setMethod(HttpMethod.GET);
         request.setBody("");
         request.setPath("themes");
-        new HttpService().httpRequest(request);
-        assertEquals("[]", new HttpService().httpRequest(request).getBody());
+        new HttpClientService().httpRequest(request);
+        assertEquals("[]", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
@@ -79,12 +79,12 @@ public class ThemeResourceFunctionalTesting {
         this.createTheme();
         request.setPath("votes");
         request.setBody("1:4");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setBody("1:5");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/overage");
-        assertEquals("4.5", new HttpService().httpRequest(request).getBody());
+        assertEquals("4.5", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
@@ -92,10 +92,10 @@ public class ThemeResourceFunctionalTesting {
         request.setMethod(HttpMethod.POST);
         request.setPath("themes");
         request.setBody("uno");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/overage");
-        assertEquals("NaN", new HttpService().httpRequest(request).getBody());
+        assertEquals("NaN", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class ThemeResourceFunctionalTesting {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/overage");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
     }
     
     @Test
@@ -111,12 +111,12 @@ public class ThemeResourceFunctionalTesting {
         this.createTheme();
         request.setPath("votes");
         request.setBody("1:4");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setBody("1:5");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/vote");
-        assertEquals("{{\"id\":1,\"name\":\"uno\"},[4, 5]}", new HttpService().httpRequest(request).getBody());
+        assertEquals("{{\"id\":1,\"name\":\"uno\"},[4, 5]}", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ThemeResourceFunctionalTesting {
         exception.expect(HttpException.class);
         request.setMethod(HttpMethod.GET);
         request.setPath("themes/1/vote");
-        new HttpService().httpRequest(request);
+        new HttpClientService().httpRequest(request);
     }
 
 }

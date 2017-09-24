@@ -1,8 +1,6 @@
-package es.upm.miw.apaw.theme.client;
+package es.upm.miw.apaw.theme.http;
 
 import es.upm.miw.apaw.theme.api.Dispatcher;
-import es.upm.miw.apaw.theme.http.HttpRequest;
-import es.upm.miw.apaw.theme.http.HttpResponse;
 
 public class Server {
     private Dispatcher dispatcher = new Dispatcher();

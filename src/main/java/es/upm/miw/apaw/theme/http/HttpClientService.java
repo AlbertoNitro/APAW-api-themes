@@ -1,13 +1,9 @@
-package es.upm.miw.apaw.theme.client;
+package es.upm.miw.apaw.theme.http;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.upm.miw.apaw.theme.http.HttpException;
-import es.upm.miw.apaw.theme.http.HttpRequest;
-import es.upm.miw.apaw.theme.http.HttpResponse;
-
-public class HttpService {
+public class HttpClientService {
 
     public HttpResponse httpRequest(HttpRequest request) {
         Logger logger = LogManager.getLogger(this.getClass().getName());
