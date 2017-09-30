@@ -22,7 +22,9 @@ public class HttpRequestBuilder {
     }
 
     public HttpRequestBuilder expandPath(String value) {
-        httpRequest.expandPath(value);
+        String path = httpRequest.getPath();
+        path = path.substring(0, path.indexOf("{")) + value + path.substring(path.indexOf("}") + 1);
+        httpRequest.setPath(path);
         return this;
     }
 

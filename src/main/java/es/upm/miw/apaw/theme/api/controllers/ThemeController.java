@@ -7,7 +7,7 @@ import java.util.Optional;
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
 import es.upm.miw.apaw.theme.api.entities.Theme;
-import es.upm.miw.apaw.theme.api.dtos.ThemeVoteDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeVotesDto;
 
 public class ThemeController {
 
@@ -28,6 +28,7 @@ public class ThemeController {
         return DaoFactory.getFactory().getThemeDao().read(themeId) != null;
     }
 
+    // java 8: con Optional se expresa que podría no encontrarse el valor, mejor que provocar null y mejor que provocar exception
     public Optional<Double> themeOverage(int themeId) {
         if (existThemeId(themeId)) {
             List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
@@ -45,10 +46,10 @@ public class ThemeController {
         }
     }
 
-    public Optional<ThemeVoteDto> themeVotes(int themeId) {
+    public Optional<ThemeVotesDto> themeVotes(int themeId) {
         if (existThemeId(themeId)) {
             List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
-            return Optional.of(new ThemeVoteDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList));
+            return Optional.of(new ThemeVotesDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList));
         } else {
             return Optional.empty();
         }

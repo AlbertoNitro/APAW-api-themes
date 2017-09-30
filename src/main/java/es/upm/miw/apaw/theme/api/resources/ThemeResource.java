@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
-import es.upm.miw.apaw.theme.api.dtos.ThemeVoteDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeVotesDto;
 import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeFieldInvalidException;
 import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 
@@ -19,16 +19,17 @@ public class ThemeResource {
 
     public static final String $ID_VOTES = $ID + "/votes";
 
-    // GET **/themes
+    // GET */themes
     public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
     }
 
-    // GET **/themes/{id}
+    // GET */themes/{id}
     public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException {
         Optional<ThemeDto> optional = new ThemeController().readTheme(themeId);
+        // In Java 7: if (response!=null) return value; else throw exception;
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
-        
+
     }
 
     // POST **/themes body="themeName"
@@ -50,8 +51,8 @@ public class ThemeResource {
     }
 
     // GET **/themes/{id}/votes
-    public ThemeVoteDto themeVotes(int themeId) throws ThemeIdNotFoundException {
-        Optional<ThemeVoteDto> optional = new ThemeController().themeVotes(themeId);
+    public ThemeVotesDto themeVotes(int themeId) throws ThemeIdNotFoundException {
+        Optional<ThemeVotesDto> optional = new ThemeController().themeVotes(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 }

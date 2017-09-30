@@ -6,23 +6,24 @@ import es.upm.miw.apaw.theme.api.daos.VoteDao;
 
 public class DaoFactoryMemory extends DaoFactory {
 
-	private ThemeDao themeDao;
-	private VoteDao voteDao;
+    private ThemeDao themeDao;
 
-	@Override
-	public ThemeDao getThemeDao() {
-		if (themeDao == null) {
-			themeDao = new ThemeDaoMemory();
-		}
-		return themeDao;
-	}
+    private VoteDao voteDao;
 
-	@Override
-	public VoteDao getVoteDao() {
-		if (voteDao == null) {
-			voteDao = new VoteDaoMemory();
-		}
-		return voteDao;
-	}
+    @Override
+    public ThemeDao getThemeDao() {
+        if (themeDao == null) {
+            themeDao = new ThemeDaoMemory();
+        }
+        return themeDao;
+    }
+
+    @Override
+    public VoteDao getVoteDao() {
+        if (voteDao == null) {
+            voteDao = new VoteDaoMemory();
+        }
+        return voteDao;
+    }
 
 }

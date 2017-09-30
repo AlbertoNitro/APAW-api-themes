@@ -25,10 +25,6 @@ public class HttpRequest extends HttpBase {
         return path.split("/");
     }
 
-    public void expandPath(String value) {
-        path = path.substring(0, path.indexOf("{")) + value + path.substring(path.indexOf("}") + 1);
-    }
-
     public boolean isEqualsPath(String pathTemplate) {
         String[] pathTemplateArray = pathTemplate.split("/");
         String[] pathArray = this.paths();

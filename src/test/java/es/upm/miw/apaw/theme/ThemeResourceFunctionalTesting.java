@@ -50,7 +50,7 @@ public class ThemeResourceFunctionalTesting {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID)
                 .expandPath("1").build();
         assertEquals("{\"id\":1,\"name\":\"uno\"}", new HttpClientService().httpRequest(request).getBody());
-        
+
     }
 
     @Test

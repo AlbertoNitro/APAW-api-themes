@@ -9,7 +9,7 @@ import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.entities.Theme;
 import es.upm.miw.apaw.theme.api.entities.Vote;
 
-public class VoteDaoMemoryIT {
+public class VoteDaoMemoryTest {
 
     private Theme theme;
 

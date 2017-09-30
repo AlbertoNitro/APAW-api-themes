@@ -8,37 +8,29 @@ public class HttpRequestTest {
 
     @Test
     public void testToString() {
-        HttpRequest httpRequest= new HttpRequest("path", HttpMethod.GET);
+        HttpRequest httpRequest = new HttpRequest("path", HttpMethod.GET);
         httpRequest.addQueryParam("key1", "value1");
         httpRequest.addQueryParam("key2", "value2");
-        assertEquals(0,httpRequest.toString().indexOf("GET /path?key1=value1&key2=value2"));
-    }
-    
-    @Test
-    public void testExpandPath() {
-        HttpRequest httpRequest= new HttpRequest("path/{id}/path", HttpMethod.GET);
-        httpRequest.expandPath("3");
-        assertEquals("path/3/path",httpRequest.getPath());
-        
+        assertEquals(0, httpRequest.toString().indexOf("GET /path?key1=value1&key2=value2"));
     }
 
     @Test
     public void testIsEqualsPathTrue() {
-        HttpRequest httpRequest= new HttpRequest("path/3/path", HttpMethod.GET);
-         assertTrue(httpRequest.isEqualsPath("path/{id}/path"));
-        
+        HttpRequest httpRequest = new HttpRequest("path/3/path", HttpMethod.GET);
+        assertTrue(httpRequest.isEqualsPath("path/{id}/path"));
+
     }
-    
+
     @Test
     public void testIsEqualsPathFalseForDistinct() {
-        HttpRequest httpRequest= new HttpRequest("path/3/path", HttpMethod.GET);
-         assertFalse(httpRequest.isEqualsPath("path2/{id}/path"));
+        HttpRequest httpRequest = new HttpRequest("path/3/path", HttpMethod.GET);
+        assertFalse(httpRequest.isEqualsPath("path2/{id}/path"));
     }
 
     @Test
     public void testIsEqualsPathFalseForLength() {
-        HttpRequest httpRequest= new HttpRequest("path/3/path", HttpMethod.GET);
-         assertFalse(httpRequest.isEqualsPath("path/{id}/path/other"));
+        HttpRequest httpRequest = new HttpRequest("path/3/path", HttpMethod.GET);
+        assertFalse(httpRequest.isEqualsPath("path/{id}/path/other"));
     }
 
 }

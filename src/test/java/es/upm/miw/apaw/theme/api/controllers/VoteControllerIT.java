@@ -23,11 +23,11 @@ public class VoteControllerIT {
         new ThemeController().createTheme("tema1");
         voteController.createVote(1, 1);
         voteController.createVote(1, 4);
-        assertEquals(2,voteController.voteList().size());
-        assertEquals("tema1",voteController.voteList().get(0).getThemeName());        
-        assertEquals(1,voteController.voteList().get(0).getVoteValue());        
+        assertEquals(2, voteController.voteList().size());
+        assertEquals("tema1", voteController.voteList().get(0).getThemeName());
+        assertEquals(1, voteController.voteList().get(0).getVoteValue());
     }
-    
+
     @Test
     public void testCreateVoteNonExistentId() {
         new ThemeController().createTheme("tema1");

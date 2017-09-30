@@ -3,6 +3,7 @@ package es.upm.miw.apaw.theme.api.dtos;
 import es.upm.miw.apaw.theme.api.entities.Vote;
 
 public class VoteDto {
+
     private String themeName;
 
     private int voteValue;

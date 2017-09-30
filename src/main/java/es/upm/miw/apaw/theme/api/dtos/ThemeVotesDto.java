@@ -4,16 +4,16 @@ import java.util.List;
 
 import es.upm.miw.apaw.theme.api.entities.Theme;
 
-public class ThemeVoteDto {
+public class ThemeVotesDto {
 
     private ThemeDto themeDto;
-    
+
     private List<Integer> voteList;
 
-    public ThemeVoteDto() {
+    public ThemeVotesDto() {
     }
 
-    public ThemeVoteDto(Theme theme, List<Integer> voteList) {
+    public ThemeVotesDto(Theme theme, List<Integer> voteList) {
         themeDto = new ThemeDto(theme);
         this.voteList = voteList;
     }
@@ -28,9 +28,7 @@ public class ThemeVoteDto {
 
     @Override
     public String toString() {
-        return "{"+ themeDto + "," + voteList + "}";
+        return "{" + themeDto + "," + voteList + "}";
     }
-    
-    
-    
+
 }
