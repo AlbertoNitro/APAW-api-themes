@@ -9,14 +9,15 @@ import org.junit.rules.ExpectedException;
 
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.daos.memory.DaoFactoryMemory;
+import es.upm.miw.apaw.theme.api.resources.ThemeResource;
+import es.upm.miw.apaw.theme.api.resources.VoteResource;
 import es.upm.miw.apaw.theme.http.HttpClientService;
 import es.upm.miw.apaw.theme.http.HttpException;
 import es.upm.miw.apaw.theme.http.HttpMethod;
 import es.upm.miw.apaw.theme.http.HttpRequest;
+import es.upm.miw.apaw.theme.http.HttpRequestBuilder;
 
 public class ThemeResourceFunctionalTesting {
-
-    private HttpRequest request;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -24,14 +25,11 @@ public class ThemeResourceFunctionalTesting {
     @Before
     public void before() {
         DaoFactory.setFactory(new DaoFactoryMemory());
-        request = new HttpRequest();
     }
-    
-    public void createTheme() {
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("uno");
-        new HttpClientService().httpRequest(request);        
+
+    private void createTheme() {
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(ThemeResource.THEMES).body("uno").build();
+        new HttpClientService().httpRequest(request);
     }
 
     @Test
@@ -42,88 +40,75 @@ public class ThemeResourceFunctionalTesting {
     @Test
     public void testCreateThemeNameEmpty() {
         exception.expect(HttpException.class);
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(ThemeResource.THEMES).body("").build();
         new HttpClientService().httpRequest(request);
     }
 
     @Test
     public void testCreateWithoutThemeName() {
         exception.expect(HttpException.class);
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(ThemeResource.THEMES).build();
         new HttpClientService().httpRequest(request);
     }
 
     @Test
     public void testThemeList() {
         this.createTheme();
-        request.setMethod(HttpMethod.GET);
-        request.setBody("");
-        request.setPath("themes");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).build();
         assertEquals("[{\"id\":1,\"name\":\"uno\"}]", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
     public void testThemeListEmpty() {
-        request.setMethod(HttpMethod.GET);
-        request.setBody("");
-        request.setPath("themes");
-        new HttpClientService().httpRequest(request);
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).build();
         assertEquals("[]", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
     public void testThemeOverage() {
         this.createTheme();
-        request.setPath("votes");
-        request.setBody("1:4");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:4").build();
         new HttpClientService().httpRequest(request);
-        request.setBody("1:5");
+        request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:5").build();
         new HttpClientService().httpRequest(request);
-        request.setMethod(HttpMethod.GET);
-        request.setPath("themes/1/overage");
+        request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE).expandPath("1")
+                .build();
         assertEquals("4.5", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
     public void testThemeOverageWithoutVote() {
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("uno");
-        new HttpClientService().httpRequest(request);
-        request.setMethod(HttpMethod.GET);
-        request.setPath("themes/1/overage");
+        this.createTheme();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE).expandPath("1")
+                .build();
         assertEquals("NaN", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
     public void testThemeOverageThemeIdNotFound() {
         exception.expect(HttpException.class);
-        request.setMethod(HttpMethod.GET);
-        request.setPath("themes/1/overage");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE).expandPath("1")
+                .build();
         new HttpClientService().httpRequest(request);
     }
-    
+
     @Test
-    public void testThemeVote() {
+    public void testThemeVotes() {
         this.createTheme();
-        request.setPath("votes");
-        request.setBody("1:4");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:4").build();
         new HttpClientService().httpRequest(request);
-        request.setBody("1:5");
+        request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:5").build();
         new HttpClientService().httpRequest(request);
-        request.setMethod(HttpMethod.GET);
-        request.setPath("themes/1/vote");
+        request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_VOTES).expandPath("1")
+                .build();
         assertEquals("{{\"id\":1,\"name\":\"uno\"},[4, 5]}", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test
     public void testThemeVoteThemeIdNotFound() {
         exception.expect(HttpException.class);
-        request.setMethod(HttpMethod.GET);
-        request.setPath("themes/1/vote");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE).expandPath("1")
+                .build();
         new HttpClientService().httpRequest(request);
     }
 

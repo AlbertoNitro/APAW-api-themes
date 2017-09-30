@@ -21,12 +21,33 @@ public class HttpRequest extends HttpBase {
         this("", HttpMethod.GET);
     }
 
-    public String getPath() {
-        return path;
-    }
-
     public String[] paths() {
         return path.split("/");
+    }
+
+    public void expandPath(String value) {
+        path = path.substring(0, path.indexOf("{")) + value + path.substring(path.indexOf("}") + 1);
+    }
+
+    public boolean isEqualsPath(String pathTemplate) {
+        String[] pathTemplateArray = pathTemplate.split("/");
+        String[] pathArray = this.paths();
+        if (pathArray.length != pathTemplateArray.length) {
+            return false;
+        } else {
+            for (int i = 0; i < pathArray.length; i++) {
+                if (pathTemplateArray[i].indexOf("{") == -1) {
+                    if (!pathTemplateArray[i].equals(pathArray[i])) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public void setPath(String path) {

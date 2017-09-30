@@ -20,21 +20,21 @@ public class Dispatcher {
     }
 
     public void doGet(HttpRequest request, HttpResponse response) {
-        if (ThemeResource.THEMES.equals(request.getPath())) {
+        if (request.isEqualsPath(ThemeResource.THEMES)) {
             response.setBody(themeResource.themeList().toString());
-        } else if (ThemeResource.THEMES.equals(request.paths()[0]) && ThemeResource.THEMES_ID_ID_OVERAGE.equals(request.paths()[2])) {
+        } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.$ID_OVERAGE)) {
             try {
                 response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
             } catch (Exception e) {
                 responseError(response, e);
             }
-        } else if (ThemeResource.THEMES.equals(request.paths()[0]) && ThemeResource.THEMES_ID_ID_VOTE.equals(request.paths()[2])) {
+        } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.$ID_VOTES)) {
             try {
-                response.setBody(themeResource.themeVote(Integer.valueOf(request.paths()[1])).toString());
+                response.setBody(themeResource.themeVotes(Integer.valueOf(request.paths()[1])).toString());
             } catch (Exception e) {
                 responseError(response, e);
             }
-        } else if (VoteResource.VOTES.equals(request.getPath())) {
+        } else if (request.isEqualsPath(VoteResource.VOTES)) {  
             response.setBody(voteResource.voteList().toString());
         } else {
             responseError(response, new RequestInvalidException(request.getPath()));

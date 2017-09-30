@@ -9,10 +9,13 @@ import org.junit.rules.ExpectedException;
 
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.daos.memory.DaoFactoryMemory;
+import es.upm.miw.apaw.theme.api.resources.ThemeResource;
+import es.upm.miw.apaw.theme.api.resources.VoteResource;
 import es.upm.miw.apaw.theme.http.HttpClientService;
 import es.upm.miw.apaw.theme.http.HttpException;
 import es.upm.miw.apaw.theme.http.HttpMethod;
 import es.upm.miw.apaw.theme.http.HttpRequest;
+import es.upm.miw.apaw.theme.http.HttpRequestBuilder;
 
 public class VoteResourceFunctionalTesting {
 
@@ -27,53 +30,47 @@ public class VoteResourceFunctionalTesting {
         request = new HttpRequest();
     }
 
-    public void createVotes() {
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("uno");
+    private void createTheme() {
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(ThemeResource.THEMES).body("uno").build();
         new HttpClientService().httpRequest(request);
-        request.setPath("votes");
-        request.setBody("1:4");
-        new HttpClientService().httpRequest(request);
-        request.setBody("1:5");
-        new HttpClientService().httpRequest(request);        
     }
-    
+
+    private void createVotes() {
+        this.createTheme();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:4").build();
+        new HttpClientService().httpRequest(request);
+        request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:5").build();
+        new HttpClientService().httpRequest(request);
+    }
+
     @Test
     public void testCreateVote() {
         this.createVotes();
     }
-    
+
     @Test
     public void testCreateVoteVoteInvalidException() {
         exception.expect(HttpException.class);
-        request.setMethod(HttpMethod.POST);
-        request.setPath("themes");
-        request.setBody("uno");
+        this.createTheme();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:-1").build();
         new HttpClientService().httpRequest(request);
-        request.setPath("votes");
-        request.setBody("1:-1");
-        new HttpClientService().httpRequest(request);
-        request.setBody("1:x");
+        request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:x").build();
         new HttpClientService().httpRequest(request);
     }
-    
+
     @Test
     public void testCreateThemeIdNotFoundException() {
         exception.expect(HttpException.class);
-        request.setMethod(HttpMethod.POST);
-        request.setPath("votes");
-        request.setBody("1:1");
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:4").build();
         new HttpClientService().httpRequest(request);
     }
-    
+
     @Test
     public void testVoteList() {
         this.createVotes();
-        request.setMethod(HttpMethod.GET);
-        request.setBody("");
-        new HttpClientService().httpRequest(request);
-        assertEquals("[{\"themeName\":\"uno,\"voteValue\":4}, {\"themeName\":\"uno,\"voteValue\":5}]", new HttpClientService().httpRequest(request).getBody());
+        request = new HttpRequestBuilder().method(HttpMethod.GET).path(VoteResource.VOTES).build();
+        assertEquals("[{\"themeName\":\"uno,\"voteValue\":4}, {\"themeName\":\"uno,\"voteValue\":5}]",
+                new HttpClientService().httpRequest(request).getBody());
     }
 
 }
