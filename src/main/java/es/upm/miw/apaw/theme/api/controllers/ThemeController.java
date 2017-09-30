@@ -54,4 +54,12 @@ public class ThemeController {
         }
     }
 
+    public Optional<ThemeDto> readTheme(int themeId) {
+        if (existThemeId(themeId)) {
+            return Optional.of(new ThemeDto(DaoFactory.getFactory().getThemeDao().read(themeId)));
+        } else {
+            return Optional.empty();
+        }
+    }
+
 }

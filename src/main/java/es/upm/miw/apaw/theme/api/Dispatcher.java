@@ -22,6 +22,12 @@ public class Dispatcher {
     public void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ThemeResource.THEMES)) {
             response.setBody(themeResource.themeList().toString());
+        } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.$ID)) {
+            try {
+                response.setBody(themeResource.readTheme(Integer.valueOf(request.paths()[1])).toString());
+            } catch (Exception e) {
+                responseError(response, e);
+            }
         } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.$ID_OVERAGE)) {
             try {
                 response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
@@ -34,7 +40,7 @@ public class Dispatcher {
             } catch (Exception e) {
                 responseError(response, e);
             }
-        } else if (request.isEqualsPath(VoteResource.VOTES)) {  
+        } else if (request.isEqualsPath(VoteResource.VOTES)) {
             response.setBody(voteResource.voteList().toString());
         } else {
             responseError(response, new RequestInvalidException(request.getPath()));

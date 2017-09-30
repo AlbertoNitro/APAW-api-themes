@@ -13,13 +13,22 @@ public class ThemeResource {
 
     public static final String THEMES = "themes";
 
-    public static final String $ID_OVERAGE = "{id}/overage";
+    public static final String $ID = "{id}";
 
-    public static final String $ID_VOTES = "{id}/votes";
+    public static final String $ID_OVERAGE = $ID + "/overage";
+
+    public static final String $ID_VOTES = $ID + "/votes";
 
     // GET **/themes
     public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
+    }
+
+    // GET **/themes/{id}
+    public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException {
+        Optional<ThemeDto> optional = new ThemeController().readTheme(themeId);
+        return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
+        
     }
 
     // POST **/themes body="themeName"
