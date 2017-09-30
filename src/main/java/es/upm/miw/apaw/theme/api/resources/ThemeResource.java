@@ -11,11 +11,11 @@ import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 public class ThemeResource {
 
     public static final String THEMES = "themes";
-    
+
     public static final String $ID_OVERAGE = "{id}/overage";
-    
+
     public static final String $ID_VOTES = "{id}/votes";
-   
+
     // GET **/themes
     public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
@@ -35,19 +35,21 @@ public class ThemeResource {
 
     // GET **/themes/{id}/overage
     public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
-        if (!new ThemeController().existThemeId(themeId)) {
+        Double overage = new ThemeController().themeOverage(themeId);
+        if (overage == null) {
             throw new ThemeIdNotFoundException(Integer.toString(themeId));
         } else {
-            return new ThemeController().themeOverage(themeId);
+            return overage;
         }
     }
-    
+
     // GET **/themes/{id}/votes
-    public ThemeVoteDto themeVotes(int themeId)  throws ThemeIdNotFoundException {
-        if (!new ThemeController().existThemeId(themeId)) {
+    public ThemeVoteDto themeVotes(int themeId) throws ThemeIdNotFoundException {
+        ThemeVoteDto themeVoteDto = new ThemeController().themeVotes(themeId);
+        if (themeVoteDto == null) {
             throw new ThemeIdNotFoundException(Integer.toString(themeId));
         } else {
-            return new ThemeController().themeVote(themeId);
-        }        
+            return themeVoteDto;
+        }
     }
 }

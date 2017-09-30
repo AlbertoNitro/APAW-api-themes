@@ -27,22 +27,34 @@ public class ThemeController {
         return DaoFactory.getFactory().getThemeDao().read(themeId) != null;
     }
 
-    public double themeOverage(int themeId) {
-        List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
-        if (voteList.isEmpty()) {
-            return Double.NaN;
+    private boolean nonExistThemeId(int themeId) {
+        return DaoFactory.getFactory().getThemeDao().read(themeId) == null;
+    }
+
+    public Double themeOverage(int themeId) {
+        if (nonExistThemeId(themeId)) {
+            return null;
         } else {
-            double total = 0;
-            for (Integer value : voteList) {
-                total += value;
+            List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
+            if (voteList.isEmpty()) {
+                return Double.NaN;
+            } else {
+                double total = 0;
+                for (Integer value : voteList) {
+                    total += value;
+                }
+                return total / voteList.size();
             }
-            return total / voteList.size();
         }
     }
 
-    public ThemeVoteDto themeVote(int themeId) {
-        List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
-        return new ThemeVoteDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList);
+    public ThemeVoteDto themeVotes(int themeId) {
+        if (nonExistThemeId(themeId)) {
+            return null;
+        } else {
+            List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
+            return new ThemeVoteDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList);
+        }
     }
 
 }

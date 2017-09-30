@@ -1,8 +1,6 @@
 package es.upm.miw.apaw.theme.api.controllers;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Before;
@@ -30,17 +28,6 @@ public class ThemeControllerIT {
     }
 
     @Test
-    public void testExistThemeIdTrue() {
-        themeController.createTheme("tema1");
-        assertTrue(themeController.existThemeId(1));
-    }
-
-    @Test
-    public void testExistThemeIdFalse() {
-        assertFalse(themeController.existThemeId(1));
-    }
-
-    @Test
     public void testThemeOverage() {
         themeController.createTheme("tema1");
         new VoteController().createVote(1, 2);
@@ -59,8 +46,8 @@ public class ThemeControllerIT {
         themeController.createTheme("tema1");
         new VoteController().createVote(1, 2);
         new VoteController().createVote(1, 3);
-        assertEquals("tema1", themeController.themeVote(1).getThemeDto().getName());
-        assertArrayEquals(new Integer[] {2, 3}, themeController.themeVote(1).getVoteList().toArray(new Integer[0]));
+        assertEquals("tema1", themeController.themeVotes(1).getThemeDto().getName());
+        assertArrayEquals(new Integer[] {2, 3}, themeController.themeVotes(1).getVoteList().toArray(new Integer[0]));
     }
 
 }
