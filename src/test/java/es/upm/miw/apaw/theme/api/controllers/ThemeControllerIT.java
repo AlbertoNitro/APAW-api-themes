@@ -32,13 +32,13 @@ public class ThemeControllerIT {
         themeController.createTheme("tema1");
         new VoteController().createVote(1, 2);
         new VoteController().createVote(1, 3);
-        assertEquals(2.5, themeController.themeOverage(1), 10e-2);
+        assertEquals(2.5, themeController.themeOverage(1).get(), 10e-2);
     }
-    
+
     @Test
     public void testThemeOverageIfEmpty() {
         themeController.createTheme("tema1");
-        assertEquals(Double.NaN, themeController.themeOverage(1), 10e-2);
+        assertEquals(Double.NaN, themeController.themeOverage(1).get(), 10e-2);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class ThemeControllerIT {
         themeController.createTheme("tema1");
         new VoteController().createVote(1, 2);
         new VoteController().createVote(1, 3);
-        assertEquals("tema1", themeController.themeVotes(1).getThemeDto().getName());
-        assertArrayEquals(new Integer[] {2, 3}, themeController.themeVotes(1).getVoteList().toArray(new Integer[0]));
+        assertEquals("tema1", themeController.themeVotes(1).get().getThemeDto().getName());
+        assertArrayEquals(new Integer[] {2, 3}, themeController.themeVotes(1).get().getVoteList().toArray(new Integer[0]));
     }
 
 }

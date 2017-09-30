@@ -1,6 +1,7 @@
 package es.upm.miw.apaw.theme.api.resources;
 
 import java.util.List;
+import java.util.Optional;
 
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
@@ -35,21 +36,13 @@ public class ThemeResource {
 
     // GET **/themes/{id}/overage
     public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
-        Double overage = new ThemeController().themeOverage(themeId);
-        if (overage == null) {
-            throw new ThemeIdNotFoundException(Integer.toString(themeId));
-        } else {
-            return overage;
-        }
+        Optional<Double> optional = new ThemeController().themeOverage(themeId);
+        return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 
     // GET **/themes/{id}/votes
     public ThemeVoteDto themeVotes(int themeId) throws ThemeIdNotFoundException {
-        ThemeVoteDto themeVoteDto = new ThemeController().themeVotes(themeId);
-        if (themeVoteDto == null) {
-            throw new ThemeIdNotFoundException(Integer.toString(themeId));
-        } else {
-            return themeVoteDto;
-        }
+        Optional<ThemeVoteDto> optional = new ThemeController().themeVotes(themeId);
+        return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 }

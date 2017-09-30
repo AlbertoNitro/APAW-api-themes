@@ -2,6 +2,7 @@ package es.upm.miw.apaw.theme.api.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
@@ -23,37 +24,33 @@ public class ThemeController {
         DaoFactory.getFactory().getThemeDao().create(new Theme(themeName));
     }
 
-    public boolean existThemeId(int themeId) {
+    private boolean existThemeId(int themeId) {
         return DaoFactory.getFactory().getThemeDao().read(themeId) != null;
     }
 
-    private boolean nonExistThemeId(int themeId) {
-        return DaoFactory.getFactory().getThemeDao().read(themeId) == null;
-    }
-
-    public Double themeOverage(int themeId) {
-        if (nonExistThemeId(themeId)) {
-            return null;
-        } else {
+    public Optional<Double> themeOverage(int themeId) {
+        if (existThemeId(themeId)) {
             List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
             if (voteList.isEmpty()) {
-                return Double.NaN;
+                return Optional.of(Double.NaN);
             } else {
                 double total = 0;
                 for (Integer value : voteList) {
                     total += value;
                 }
-                return total / voteList.size();
+                return Optional.of(total / voteList.size());
             }
+        } else {
+            return Optional.empty();
         }
     }
 
-    public ThemeVoteDto themeVotes(int themeId) {
-        if (nonExistThemeId(themeId)) {
-            return null;
-        } else {
+    public Optional<ThemeVoteDto> themeVotes(int themeId) {
+        if (existThemeId(themeId)) {
             List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
-            return new ThemeVoteDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList);
+            return Optional.of(new ThemeVoteDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList));
+        } else {
+            return Optional.empty();
         }
     }
 
