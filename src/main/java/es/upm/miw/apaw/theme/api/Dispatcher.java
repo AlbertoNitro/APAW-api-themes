@@ -1,9 +1,8 @@
 package es.upm.miw.apaw.theme.api;
 
-import es.upm.miw.apaw.theme.api.exceptions.InvalidRequestException;
-import es.upm.miw.apaw.theme.api.exceptions.InvalidThemeFieldException;
 import es.upm.miw.apaw.theme.api.resources.ThemeResource;
 import es.upm.miw.apaw.theme.api.resources.VoteResource;
+import es.upm.miw.apaw.theme.api.resources.exceptions.RequestInvalidException;
 import es.upm.miw.apaw.theme.http.HttpRequest;
 import es.upm.miw.apaw.theme.http.HttpResponse;
 import es.upm.miw.apaw.theme.http.HttpStatus;
@@ -20,75 +19,53 @@ public class Dispatcher {
     }
 
     public void doGet(HttpRequest request, HttpResponse response) {
-        // **/themes
-        if ("themes".equals(request.getPath())) {
-            response.setBody(themeResource.themeList().toString());
-            // **/themes/{id}/overage
-        } else if ("themes".equals(request.paths()[0]) && "overage".equals(request.paths()[2])) {
-            try {
+        try {
+            if (request.isEqualsPath(ThemeResource.THEMES)) {
+                response.setBody(themeResource.themeList().toString());
+            } else if (request.isEqualsPath(ThemeResource.THEMES + ThemeResource.ID)) {
+                response.setBody(themeResource.readTheme(Integer.valueOf(request.paths()[1])).toString());
+            } else if (request.isEqualsPath(ThemeResource.THEMES + ThemeResource.ID_OVERAGE)) {
                 response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
-            } catch (Exception e) {
-                responseError(response, e);
+            } else if (request.isEqualsPath(ThemeResource.THEMES + ThemeResource.ID_VOTES)) {
+                response.setBody(themeResource.themeVoteList(Integer.valueOf(request.paths()[1])).toString());
+            } else if (request.isEqualsPath(VoteResource.VOTES)) {
+                response.setBody(voteResource.voteList().toString());
+            } else {
+                throw new RequestInvalidException(request.getPath());
             }
-            // **/votes
-        } else if ("votes".equals(request.getPath())) {
-            response.setBody(voteResource.voteList().toString());
-        } else {
-            responseError(response, new InvalidRequestException(request.getPath()));
+        } catch (Exception e) {
+            responseError(response, e);
         }
     }
 
     public void doPost(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        // POST **/themes body="themeName"
-        case "themes":
-            // Injectar parámetros...
-            try {
+        try {
+            if (request.isEqualsPath(ThemeResource.THEMES)) {
                 themeResource.createTheme(request.getBody());
                 response.setStatus(HttpStatus.CREATED);
-            } catch (InvalidThemeFieldException e) {
-                this.responseError(response, e);
-            }
-            break;
-        // POST votes body="themeId:vote"
-        case "votes":
-            String themeId = request.getBody().split(":")[0];
-            String vote = request.getBody().split(":")[1];
-            try {
+            } else if (request.isEqualsPath(VoteResource.VOTES)) {
+                String themeId = request.getBody().split(":")[0]; // body="themeId:vote"
+                String vote = request.getBody().split(":")[1];
                 voteResource.createVote(Integer.valueOf(themeId), Integer.valueOf(vote));
                 response.setStatus(HttpStatus.CREATED);
-            } catch (Exception e) {
-                responseError(response, e);
+            } else {
+                throw new RequestInvalidException(request.getPath());
             }
-            break;
-        default:
-            responseError(response, new InvalidRequestException(request.getPath()));
-            break;
+        } catch (Exception e) {
+            responseError(response, e);
         }
     }
 
     public void doPut(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        default:
-            responseError(response, new InvalidRequestException(request.getPath()));
-            break;
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
     public void doPatch(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        default:
-            responseError(response, new InvalidRequestException(request.getPath()));
-            break;
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
     public void doDelete(HttpRequest request, HttpResponse response) {
-        switch (request.getPath()) {
-        default:
-            responseError(response, new InvalidRequestException(request.getPath()));
-            break;
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
 }

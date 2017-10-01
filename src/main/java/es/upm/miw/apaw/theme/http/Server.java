@@ -5,7 +5,7 @@ import es.upm.miw.apaw.theme.api.Dispatcher;
 public class Server {
     private Dispatcher dispatcher = new Dispatcher();
 
-    public HttpResponse request(HttpRequest request) {
+    public HttpResponse submit(HttpRequest request) {
         HttpResponse response = new HttpResponse();
         switch (request.getMethod()) {
         case POST:

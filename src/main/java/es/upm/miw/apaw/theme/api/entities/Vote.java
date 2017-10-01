@@ -21,20 +21,24 @@ public class Vote {
     }
 
     public void setId(int id) {
-		this.id = id;
-	}
+        this.id = id;
+    }
 
-	public int getValue() {
+    public int getValue() {
         return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public Theme getTheme() {
         return theme;
     }
 
-	@Override
-	public String toString() {
-		return "Vote [id=" + id + ", value=" + value + ", theme=" + theme + "]";
-	}
+    @Override
+    public String toString() {
+        return "Vote [id=" + id + ", value=" + value + ", theme=" + theme + "]";
+    }
 
 }

@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -29,8 +27,7 @@
 		<!-- Logs -->
 		<log4j.version>2.3</log4j.version>
 		<!-- Data Base -->
-		<database.driver>com.mysql.jdbc.Driver</database.driver>
-		<database.url>jdbc:mysql://localhost:3306/eco</database.url>
+		<integration.test.skip>false</integration.test.skip>
 	</properties>
 
 	<profiles>
@@ -46,8 +43,6 @@
 			</activation>
 			<properties>
 				<logs.level.root>debug</logs.level.root>
-				<database.user>root</database.user>
-				<database.password></database.password>
 			</properties>
 		</profile>
 		<!-- mvn install -Denvironment.type=preproduction -->
@@ -61,9 +56,22 @@
 			</activation>
 			<properties>
 				<logs.level.root>info</logs.level.root>
-				<database.user>myUser</database.user>
-				<database.password>myPass</database.password>
+				<integration.test.skip>true</integration.test.skip>
 			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${maven.failsafe.version}</version>
+						<configuration>
+							<includes>
+								<include>**/*FunctionalTesting</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<!-- mvn install -Denvironment.type=production -->
 		<profile>
@@ -76,8 +84,6 @@
 			</activation>
 			<properties>
 				<logs.level.root>error</logs.level.root>
-				<database.user>otherUser</database.user>
-				<database.password>otherPass</database.password>
 			</properties>
 		</profile>
 	</profiles>
@@ -133,41 +139,41 @@
 						<include>**/*IT.java</include>
 					</includes>
 				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-						<configuration>
-							<skip>false</skip>
-						</configuration>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-						<configuration>
-							<skip>false</skip>
-						</configuration>
-					</execution>
-				</executions>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${integration.test.skip}</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${integration.test.skip}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
 			</plugin>
 		</plugins>
 	</build>
 
-	<developers>
-		<developer>
-			<name>Name</name>
-			<id>Id</id>
-			<email>mail@gmail.com</email>
-			<organization>MIW UPM</organization>
-			<roles>
-				<role>Architect</role>
-				<role>Developer</role>
-			</roles>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <name>Jesus Bernal</name>
+            <id>J.Bernal</id>
+            <email>j.bernal@upm.es</email>
+            <organization>MIW UPM</organization>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
 
 </project>

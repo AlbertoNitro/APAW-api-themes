@@ -13,4 +13,8 @@ public enum HttpStatus {
     public int getCode() {
         return code;
     }
+
+    public boolean isError() {
+        return this.code >= 400;
+    }
 }

@@ -1,37 +1,51 @@
 package es.upm.miw.apaw.theme.api.resources;
 
+import java.util.List;
+import java.util.Optional;
+
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
-import es.upm.miw.apaw.theme.api.dtos.OverageDto;
-import es.upm.miw.apaw.theme.api.dtos.ThemeListDto;
-import es.upm.miw.apaw.theme.api.exceptions.InvalidThemeFieldException;
-import es.upm.miw.apaw.theme.api.exceptions.NotFoundThemeIdException;
+import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeVoteListDto;
+import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeFieldInvalidException;
+import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 
 public class ThemeResource {
 
-    // GET **/themes
-    public ThemeListDto themeList() {
+    public static final String THEMES = "themes";
+
+    public static final String ID = "/{id}";
+
+    public static final String ID_OVERAGE = ID + "/overage";
+
+    public static final String ID_VOTES = ID + "/votes";
+
+    public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
     }
 
-    // POST **/themes body="themeName"
-    public void createTheme(String themeName) throws InvalidThemeFieldException {
+    public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException {
+        Optional<ThemeDto> optional = new ThemeController().readTheme(themeId);
+        return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
+    }
+
+    public void createTheme(String themeName) throws ThemeFieldInvalidException {
         this.validateField(themeName);
         new ThemeController().createTheme(themeName);
     }
 
-    private void validateField(String field) throws InvalidThemeFieldException {
-        if (field == null || field.isEmpty()) {
-            throw new InvalidThemeFieldException(field);
-        }
+    public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
+        Optional<Double> optional = new ThemeController().themeOverage(themeId);
+        return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 
-    // GET **themes/{id}/overage
-    public OverageDto themeOverage(int themeId) throws NotFoundThemeIdException {
-        OverageDto overageWrapper = new ThemeController().themeOverage(themeId);
-        if (overageWrapper == null) {
-            throw new NotFoundThemeIdException("" + themeId);
-        } else {
-            return overageWrapper;
+    public ThemeVoteListDto themeVoteList(int themeId) throws ThemeIdNotFoundException {
+        Optional<ThemeVoteListDto> optional = new ThemeController().themeVotes(themeId);
+        return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
+    }
+
+    private void validateField(String field) throws ThemeFieldInvalidException {
+        if (field == null || field.isEmpty()) {
+            throw new ThemeFieldInvalidException(field);
         }
     }
 
