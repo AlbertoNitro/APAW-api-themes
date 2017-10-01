@@ -33,12 +33,6 @@ public class ThemeResource {
         new ThemeController().createTheme(themeName);
     }
 
-    private void validateField(String field) throws ThemeFieldInvalidException {
-        if (field == null || field.isEmpty()) {
-            throw new ThemeFieldInvalidException(field);
-        }
-    }
-
     public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
         Optional<Double> optional = new ThemeController().themeOverage(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
@@ -48,4 +42,11 @@ public class ThemeResource {
         Optional<ThemeVotesDto> optional = new ThemeController().themeVotes(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
+
+    private void validateField(String field) throws ThemeFieldInvalidException {
+        if (field == null || field.isEmpty()) {
+            throw new ThemeFieldInvalidException(field);
+        }
+    }
+
 }

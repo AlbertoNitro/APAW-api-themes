@@ -29,7 +29,7 @@ public class Dispatcher {
             } else if (request.isEqualsPath(ThemeResource.THEMES + ThemeResource.ID_VOTES)) {
                 response.setBody(themeResource.themeVotes(Integer.valueOf(request.paths()[1])).toString());
             } else if (request.isEqualsPath(VoteResource.VOTES)) {
-                response.setBody(voteResource.voteList().toString());
+                response.setBody(voteResource.votes().toString());
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
@@ -44,8 +44,7 @@ public class Dispatcher {
                 themeResource.createTheme(request.getBody());
                 response.setStatus(HttpStatus.CREATED);
             } else if (request.isEqualsPath(VoteResource.VOTES)) {
-                // body="themeId:vote"
-                String themeId = request.getBody().split(":")[0];
+                String themeId = request.getBody().split(":")[0]; // body="themeId:vote"
                 String vote = request.getBody().split(":")[1];
                 voteResource.createVote(Integer.valueOf(themeId), Integer.valueOf(vote));
                 response.setStatus(HttpStatus.CREATED);
@@ -55,7 +54,6 @@ public class Dispatcher {
         } catch (Exception e) {
             responseError(response, e);
         }
-
     }
 
     public void doPut(HttpRequest request, HttpResponse response) {

@@ -69,11 +69,6 @@ public class HttpRequest extends HttpBase {
         queryParams.clear();
     }
 
-    @Override
-    public String toString() {
-        return method.toString() + " /" + path + this.queryParams() + "   " + super.toString();
-    }
-
     private String queryParams() {
         StringBuilder query = new StringBuilder();
         String separator = "?";
@@ -85,6 +80,11 @@ public class HttpRequest extends HttpBase {
             separator = "&";
         }
         return query.toString();
+    }
+    
+    @Override
+    public String toString() {
+        return method.toString() + " /" + path + this.queryParams() + "   " + super.toString();
     }
 
 }

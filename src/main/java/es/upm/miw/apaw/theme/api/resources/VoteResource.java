@@ -20,7 +20,7 @@ public class VoteResource {
         }
     }
 
-    public List<VoteDto> voteList() { // GET **/votes
+    public List<VoteDto> votes() {
         return new VoteController().voteList();
     }
 
