@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import es.upm.miw.apaw.theme.api.controllers.ThemeController;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
-import es.upm.miw.apaw.theme.api.dtos.ThemeVotesDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeVoteListDto;
 import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeFieldInvalidException;
 import es.upm.miw.apaw.theme.api.resources.exceptions.ThemeIdNotFoundException;
 
@@ -38,8 +38,8 @@ public class ThemeResource {
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 
-    public ThemeVotesDto themeVotes(int themeId) throws ThemeIdNotFoundException {
-        Optional<ThemeVotesDto> optional = new ThemeController().themeVotes(themeId);
+    public ThemeVoteListDto themeVoteList(int themeId) throws ThemeIdNotFoundException {
+        Optional<ThemeVoteListDto> optional = new ThemeController().themeVotes(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 

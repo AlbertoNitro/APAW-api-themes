@@ -27,9 +27,9 @@ public class Dispatcher {
             } else if (request.isEqualsPath(ThemeResource.THEMES + ThemeResource.ID_OVERAGE)) {
                 response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
             } else if (request.isEqualsPath(ThemeResource.THEMES + ThemeResource.ID_VOTES)) {
-                response.setBody(themeResource.themeVotes(Integer.valueOf(request.paths()[1])).toString());
+                response.setBody(themeResource.themeVoteList(Integer.valueOf(request.paths()[1])).toString());
             } else if (request.isEqualsPath(VoteResource.VOTES)) {
-                response.setBody(voteResource.votes().toString());
+                response.setBody(voteResource.voteList().toString());
             } else {
                 throw new RequestInvalidException(request.getPath());
             }

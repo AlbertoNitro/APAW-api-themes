@@ -7,7 +7,7 @@ import java.util.Optional;
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.dtos.ThemeDto;
 import es.upm.miw.apaw.theme.api.entities.Theme;
-import es.upm.miw.apaw.theme.api.dtos.ThemeVotesDto;
+import es.upm.miw.apaw.theme.api.dtos.ThemeVoteListDto;
 
 public class ThemeController {
 
@@ -46,10 +46,10 @@ public class ThemeController {
         }
     }
 
-    public Optional<ThemeVotesDto> themeVotes(int themeId) {
+    public Optional<ThemeVoteListDto> themeVotes(int themeId) {
         if (existThemeId(themeId)) {
             List<Integer> voteList = DaoFactory.getFactory().getVoteDao().findValueByThemeId(themeId);
-            return Optional.of(new ThemeVotesDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList));
+            return Optional.of(new ThemeVoteListDto(DaoFactory.getFactory().getThemeDao().read(themeId), voteList));
         } else {
             return Optional.empty();
         }

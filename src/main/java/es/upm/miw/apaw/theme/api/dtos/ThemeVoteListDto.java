@@ -4,16 +4,16 @@ import java.util.List;
 
 import es.upm.miw.apaw.theme.api.entities.Theme;
 
-public class ThemeVotesDto {
+public class ThemeVoteListDto {
 
     private ThemeDto themeDto;
 
     private List<Integer> voteList;
 
-    public ThemeVotesDto() {
+    public ThemeVoteListDto() {
     }
 
-    public ThemeVotesDto(Theme theme, List<Integer> voteList) {
+    public ThemeVoteListDto(Theme theme, List<Integer> voteList) {
         themeDto = new ThemeDto(theme);
         this.voteList = voteList;
     }
