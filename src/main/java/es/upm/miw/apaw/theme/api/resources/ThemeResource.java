@@ -13,27 +13,22 @@ public class ThemeResource {
 
     public static final String THEMES = "themes";
 
-    public static final String $ID = "{id}";
+    public static final String ID$ = "{id}";
 
-    public static final String $ID_OVERAGE = $ID + "/overage";
+    public static final String ID_OVERAGE$ = ID$ + "/overage";
 
-    public static final String $ID_VOTES = $ID + "/votes";
+    public static final String ID_VOTES$ = ID$ + "/votes";
 
-    // GET */themes
-    public List<ThemeDto> themeList() {
+    public List<ThemeDto> themeList() { // GET */themes
         return new ThemeController().themeList();
     }
 
-    // GET */themes/{id}
-    public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException {
+    public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException { // GET */themes/{id}
         Optional<ThemeDto> optional = new ThemeController().readTheme(themeId);
-        // In Java 7: if (response!=null) return value; else throw exception;
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
-
     }
 
-    // POST **/themes body="themeName"
-    public void createTheme(String themeName) throws ThemeFieldInvalidException {
+    public void createTheme(String themeName) throws ThemeFieldInvalidException { // POST **/themes body="themeName"
         this.validateField(themeName);
         new ThemeController().createTheme(themeName);
     }
@@ -44,14 +39,12 @@ public class ThemeResource {
         }
     }
 
-    // GET **/themes/{id}/overage
-    public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
+    public Double themeOverage(int themeId) throws ThemeIdNotFoundException { // GET **/themes/{id}/overage
         Optional<Double> optional = new ThemeController().themeOverage(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 
-    // GET **/themes/{id}/votes
-    public ThemeVotesDto themeVotes(int themeId) throws ThemeIdNotFoundException {
+    public ThemeVotesDto themeVotes(int themeId) throws ThemeIdNotFoundException { // GET **/themes/{id}/votes
         Optional<ThemeVotesDto> optional = new ThemeController().themeVotes(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }

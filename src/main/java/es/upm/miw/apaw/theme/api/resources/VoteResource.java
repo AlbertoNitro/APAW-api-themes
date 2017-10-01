@@ -11,8 +11,8 @@ public class VoteResource {
 
     public static final String VOTES = "votes";
 
-    // POST **/votes body="themeId:vote"
-    public void createVote(int themeId, int vote) throws VoteInvalidException, ThemeIdNotFoundException {
+    public void createVote(int themeId, int vote) throws VoteInvalidException, ThemeIdNotFoundException { // POST **/votes
+                                                                                                          // body="themeId:vote"
         if (vote < 0 || vote > 10) {
             throw new VoteInvalidException(Integer.toString(vote));
         }
@@ -21,8 +21,7 @@ public class VoteResource {
         }
     }
 
-    // GET **/votes
-    public List<VoteDto> voteList() {
+    public List<VoteDto> voteList() { // GET **/votes
         return new VoteController().voteList();
     }
 

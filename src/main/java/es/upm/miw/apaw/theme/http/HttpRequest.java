@@ -32,11 +32,10 @@ public class HttpRequest extends HttpBase {
             return false;
         } else {
             for (int i = 0; i < pathArray.length; i++) {
-                if (pathTemplateArray[i].indexOf("{") == -1) {
-                    if (!pathTemplateArray[i].equals(pathArray[i])) {
-                        return false;
-                    }
+                if (pathTemplateArray[i].indexOf('{') == -1 && !pathTemplateArray[i].equals(pathArray[i])) {
+                    return false;
                 }
+
             }
         }
         return true;

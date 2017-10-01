@@ -47,7 +47,7 @@ public class ThemeResourceFunctionalTesting {
     @Test
     public void testReadTheme() {
         this.createTheme();
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID)
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.ID$)
                 .expandPath("1").build();
         assertEquals("{\"id\":1,\"name\":\"uno\"}", new HttpClientService().httpRequest(request).getBody());
 
@@ -73,7 +73,7 @@ public class ThemeResourceFunctionalTesting {
         new HttpClientService().httpRequest(request);
         request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:5").build();
         new HttpClientService().httpRequest(request);
-        request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE).expandPath("1")
+        request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.ID_OVERAGE$).expandPath("1")
                 .build();
         assertEquals("4.5", new HttpClientService().httpRequest(request).getBody());
     }
@@ -81,14 +81,14 @@ public class ThemeResourceFunctionalTesting {
     @Test
     public void testThemeOverageWithoutVote() {
         this.createTheme();
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE)
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.ID_OVERAGE$)
                 .expandPath("1").build();
         assertEquals("NaN", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test(expected = HttpException.class)
     public void testThemeOverageThemeIdNotFound() {
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE)
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.ID_OVERAGE$)
                 .expandPath("1").build();
         new HttpClientService().httpRequest(request);
     }
@@ -100,14 +100,14 @@ public class ThemeResourceFunctionalTesting {
         new HttpClientService().httpRequest(request);
         request = new HttpRequestBuilder().method(HttpMethod.POST).path(VoteResource.VOTES).body("1:5").build();
         new HttpClientService().httpRequest(request);
-        request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_VOTES).expandPath("1")
+        request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.ID_VOTES$).expandPath("1")
                 .build();
         assertEquals("{{\"id\":1,\"name\":\"uno\"},[4, 5]}", new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test(expected = HttpException.class)
     public void testThemeVoteThemeIdNotFound() {
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.$ID_OVERAGE)
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(ThemeResource.THEMES).path(ThemeResource.ID_OVERAGE$)
                 .expandPath("1").build();
         new HttpClientService().httpRequest(request);
     }
