@@ -11,8 +11,7 @@ public class VoteResource {
 
     public static final String VOTES = "votes";
 
-    public void createVote(int themeId, int vote) throws VoteInvalidException, ThemeIdNotFoundException { // POST **/votes
-                                                                                                          // body="themeId:vote"
+    public void createVote(int themeId, int vote) throws VoteInvalidException, ThemeIdNotFoundException {
         if (vote < 0 || vote > 10) {
             throw new VoteInvalidException(Integer.toString(vote));
         }

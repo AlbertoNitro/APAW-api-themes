@@ -13,22 +13,22 @@ public class ThemeResource {
 
     public static final String THEMES = "themes";
 
-    public static final String ID$ = "{id}";
+    public static final String ID = "{id}";
 
-    public static final String ID_OVERAGE$ = ID$ + "/overage";
+    public static final String ID_OVERAGE = ID + "/overage";
 
-    public static final String ID_VOTES$ = ID$ + "/votes";
+    public static final String ID_VOTES = ID + "/votes";
 
-    public List<ThemeDto> themeList() { // GET */themes
+    public List<ThemeDto> themeList() {
         return new ThemeController().themeList();
     }
 
-    public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException { // GET */themes/{id}
+    public ThemeDto readTheme(int themeId) throws ThemeIdNotFoundException {
         Optional<ThemeDto> optional = new ThemeController().readTheme(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 
-    public void createTheme(String themeName) throws ThemeFieldInvalidException { // POST **/themes body="themeName"
+    public void createTheme(String themeName) throws ThemeFieldInvalidException {
         this.validateField(themeName);
         new ThemeController().createTheme(themeName);
     }
@@ -39,12 +39,12 @@ public class ThemeResource {
         }
     }
 
-    public Double themeOverage(int themeId) throws ThemeIdNotFoundException { // GET **/themes/{id}/overage
+    public Double themeOverage(int themeId) throws ThemeIdNotFoundException {
         Optional<Double> optional = new ThemeController().themeOverage(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }
 
-    public ThemeVotesDto themeVotes(int themeId) throws ThemeIdNotFoundException { // GET **/themes/{id}/votes
+    public ThemeVotesDto themeVotes(int themeId) throws ThemeIdNotFoundException {
         Optional<ThemeVotesDto> optional = new ThemeController().themeVotes(themeId);
         return optional.orElseThrow(() -> new ThemeIdNotFoundException(Integer.toString(themeId)));
     }

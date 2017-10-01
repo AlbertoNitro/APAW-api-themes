@@ -22,11 +22,11 @@ public class Dispatcher {
         try {
             if (request.isEqualsPath(ThemeResource.THEMES)) {
                 response.setBody(themeResource.themeList().toString());
-            } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.ID$)) {
+            } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.ID)) {
                 response.setBody(themeResource.readTheme(Integer.valueOf(request.paths()[1])).toString());
-            } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.ID_OVERAGE$)) {
+            } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.ID_OVERAGE)) {
                 response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
-            } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.ID_VOTES$)) {
+            } else if (request.isEqualsPath(ThemeResource.THEMES + "/" + ThemeResource.ID_VOTES)) {
                 response.setBody(themeResource.themeVotes(Integer.valueOf(request.paths()[1])).toString());
             } else if (request.isEqualsPath(VoteResource.VOTES)) {
                 response.setBody(voteResource.voteList().toString());
