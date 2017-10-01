@@ -14,9 +14,6 @@ public class HttpRequestBuilder {
     }
 
     public HttpRequestBuilder path(String path) {
-        if (!httpRequest.getPath().isEmpty()) {
-            path = "/" + path;
-        }
         httpRequest.setPath(httpRequest.getPath() + path);
         return this;
     }
@@ -32,20 +29,19 @@ public class HttpRequestBuilder {
         httpRequest.addQueryParam(key, value);
         return this;
     }
-    
+
     public HttpRequestBuilder headerParam(String key, String value) {
         httpRequest.addHeaderParam(key, value);
         return this;
     }
-    
+
     public HttpRequestBuilder body(String body) {
         httpRequest.setBody(body);
         return this;
     }
-    
+
     public HttpRequest build() {
         return httpRequest;
     }
-
 
 }

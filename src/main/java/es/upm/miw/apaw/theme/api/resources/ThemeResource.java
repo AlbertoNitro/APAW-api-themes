@@ -13,7 +13,7 @@ public class ThemeResource {
 
     public static final String THEMES = "themes";
 
-    public static final String ID = "{id}";
+    public static final String ID = "/{id}";
 
     public static final String ID_OVERAGE = ID + "/overage";
 
