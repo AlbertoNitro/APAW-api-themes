@@ -10,14 +10,21 @@ public abstract class GenericDaoMemory<T> implements GenericDao<T, Integer> {
 
     private Map<Integer, T> map;
 
+    private int id;
+
+    public GenericDaoMemory() {
+        id = 1;
+    }
+
     protected void setMap(Map<Integer, T> map) {
         this.map = map;
     }
 
     @Override
     public void create(T entity) {
-        map.put(map.size() + 1, entity);
-        this.setId(entity, map.size());
+        map.put(id, entity);
+        this.setId(entity, id);
+        id++;
     }
 
     @Override
