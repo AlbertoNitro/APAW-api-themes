@@ -17,7 +17,7 @@ public class VoteDaoMemoryTest {
 
     @Before
     public void before() {
-        DaoFactory.setFactory(new DaoFactoryMemory());
+        DaoFactory.setFactory(new DaoMemoryFactory());
         theme = new Theme("tema1");
         vote = new Vote(3, theme);
         DaoFactory.getFactory().getVoteDao().create(vote);

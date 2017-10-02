@@ -6,7 +6,7 @@ import java.util.Map;
 
 import es.upm.miw.apaw.theme.api.daos.GenericDao;
 
-public abstract class GenericMemoryDao<T> implements GenericDao<T, Integer> {
+public abstract class GenericDaoMemory<T> implements GenericDao<T, Integer> {
 
     private Map<Integer, T> map;
 

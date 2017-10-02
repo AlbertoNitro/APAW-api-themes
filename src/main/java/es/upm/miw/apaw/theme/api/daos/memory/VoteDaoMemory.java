@@ -7,7 +7,7 @@ import java.util.List;
 import es.upm.miw.apaw.theme.api.daos.VoteDao;
 import es.upm.miw.apaw.theme.api.entities.Vote;
 
-public class VoteDaoMemory extends GenericMemoryDao<Vote> implements VoteDao {
+public class VoteDaoMemory extends GenericDaoMemory<Vote> implements VoteDao {
 
     public VoteDaoMemory() {
         this.setMap(new HashMap<Integer, Vote>());
