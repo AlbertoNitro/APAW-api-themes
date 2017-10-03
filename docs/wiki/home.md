@@ -1,5 +1,6 @@
 # APAW. Práctica ECP2: Desarrollo de un mini API-Rest simulado a partir de un modelo de entidades
 > Este proyecto pretende ser un ejemplo de arquitectura de un API-Rest simulado para comprender las capas que intervienen y la organización de los diferentes tipos de test, con integración continua y control de la calidad del código.  
+>
 > El modelo de entidades ha sido indicado en la retroalimentación de la práctica ECP1
 > #### [Máster en Ingeniería Web por la Universidad Politécnica de Madrid (miw-upm)](http://miw.etsisi.upm.es)
 > #### Asignatura: *Arquitectura y Patrones para Aplicaciones Web*
@@ -7,8 +8,10 @@
 ## Proceso de trabajo
 > Se utilizará el **flujo de trabajo ramificado**
 
-Por cada fase, se crearán **issues** (mínimo uno por fase) con su descripción en la wiki de manera concisa. Sería suficiente una sola página organizada por capítulos.  
+Para organizar el desarrollo se crearán **issues** (mínimo tres) con su descripción en la wiki de manera concisa. Sería suficiente una sola página organizada por capítulos. 
+
 Se podrá copiar o adaptar cualquier clase de este mismo repositorio, pero siempre se deberá utilizar un léxico relacionado con el modelo de entidades dado en la retroalimentación de la práctica ECP1.  
+
 También se podrá copiar cualquier clase desarrollada en la práctica ECP1.
 
 ## Fases del Ejercicio
@@ -17,7 +20,7 @@ También se podrá copiar cualquier clase desarrollada en la práctica ECP1.
 1. Se subirá a **GitHub** y se conectara con **Travis-CI** para la integración continua y con **Sonarcloud** para el análisis del código
 
 ### Fase 1 **(+3)**: Definición del API Rest e implementación del dispatcher con los DTOs
-1. Definición de los **recursos** en la wiki. Se detallarán las peticiones con los valores enviado y devueltos, los estados devueltos con sus códigos y las posibles excepciones provocadas
+1. Definición de la **petición** en la wiki. Se detallarán con los valores enviados y devueltos, los estados devueltos con sus códigos y las posibles excepciones provocadas. Si se prefiere, se pueden definir las seis a la vez, en este caso, se realizará un **issue** por fase.
 1. Copia del **paquete http** para la simulación de http, se puede localizar en este mismo repositorio
 1. Programación de los **Test de Funcionalidad**
 1. Programación del **Dispatcher**. Dependiendo de los recursos, devolverá valores fijos para pasar los test
@@ -34,10 +37,10 @@ También se podrá copiar cualquier clase desarrollada en la práctica ECP1.
 1. Programación de los controladores con sus test de integración
 1. Conectar el paquete de recursos con el paquete de controladores y superar los test de funcionalidad
 
-### Repetir las Fases 1 a Fase 3, hasta que haya un mínimo de seis peticiones diferentes
+### Repetir las Fases 1 a Fase 3, hasta que haya un mínimo de seis peticiones diferentes, en este caso, se realizará un **issue** por petición.
 
 ### Criterios de evaluación
-* Fase 1: **3 puntos**
+* Fase 1: **3 puntos** 
 * Fase 2: **3 puntos**
 * Fase 3: **4 puntos**
 
