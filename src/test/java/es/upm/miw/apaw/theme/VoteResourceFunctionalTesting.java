@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import es.upm.miw.apaw.theme.api.daos.DaoFactory;
-import es.upm.miw.apaw.theme.api.daos.memory.DaoFactoryMemory;
+import es.upm.miw.apaw.theme.api.daos.memory.DaoMemoryFactory;
 import es.upm.miw.apaw.theme.api.resources.ThemeResource;
 import es.upm.miw.apaw.theme.api.resources.VoteResource;
 import es.upm.miw.apaw.theme.http.HttpClientService;
@@ -26,7 +26,7 @@ public class VoteResourceFunctionalTesting {
 
     @Before
     public void before() {
-        DaoFactory.setFactory(new DaoFactoryMemory());
+        DaoFactory.setFactory(new DaoMemoryFactory());
         request = new HttpRequest();
     }
 

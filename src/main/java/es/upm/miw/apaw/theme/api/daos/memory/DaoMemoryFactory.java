@@ -4,7 +4,7 @@ import es.upm.miw.apaw.theme.api.daos.DaoFactory;
 import es.upm.miw.apaw.theme.api.daos.ThemeDao;
 import es.upm.miw.apaw.theme.api.daos.VoteDao;
 
-public class DaoFactoryMemory extends DaoFactory {
+public class DaoMemoryFactory extends DaoFactory {
 
     private ThemeDao themeDao;
 
